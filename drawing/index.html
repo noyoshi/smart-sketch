@@ -1,2 +1,56 @@
-<body></body>
-<script src="./index.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="style.css">
+
+<body>
+    <div id="sidebar">
+        <div class="colorButtons">
+            <h3>Colour</h3>
+            <input type="color" id="colorpicker" value="#c81464" class="colorpicker">
+        </div>
+        <div class="colorButtons">
+            <h3>Bg Color</h3>
+            <input type="color" value="#ffffff" id="bgcolorpicker" class="colorpicker">
+        </div>
+
+        <div class="toolsButtons">
+            <h3>Tools</h3>
+            <button id="eraser" class="btn btn-default"><span class="glyphicon glyphicon-erase"
+                    aria-hidden="true"></span></button>
+            <button id="clear" class="btn btn-danger"> <span class="glyphicon glyphicon-repeat"
+                    aria-hidden="true"></span></button>
+        </div>
+
+        <div class="buttonSize">
+            <h3>Size (<span id="showSize">5</span>)</h3>
+            <input type="range" min="1" max="50" value="5" step="1" id="controlSize">
+        </div>
+
+        <div class="canvasSize">
+            <h3>Canvas</h3>
+            <div class="input-group">
+                <span class="input-group-addon">X</span>
+                <input type="number" id="sizeX" class="form-control" placeholder="sizeX" value="800" class="size">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">Y</span>
+                <input type="number" id="sizeY" class="form-control" placeholder="sizeY" value="800" class="size">
+            </div>
+            <input type="button" class="updateSize btn btn-success" value="Update" id="canvasUpdate">
+        </div>
+        <div class="Storage">
+            <h3>Storage</h3>
+            <input type="button" value="Save" class="btn btn-warning" id="save">
+            <input type="button" value="Load" class="btn btn-warning" id="load">
+            <input type="button" value="Clear" class="btn btn-warning" id="clearCache">
+        </div>
+        <div class="extra">
+            <h3>Extra</h3>
+            <a id="saveToImage" class="btn btn-warning">Download</a>
+        </div>
+
+    </div>
+</body>
+
+<script type="text/javascript" src="index.js"></script>
