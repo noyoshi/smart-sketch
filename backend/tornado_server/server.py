@@ -31,9 +31,11 @@ class UploadHandler(BaseHandler):
         print("recieved a file")
         pic = self.request.files['file'][0]
         fname = pic['filename']
+        flocation = "img/" + fname
         output_file = open("img/" + fname, 'wb')
         output_file.write(pic['body'])
-        self.write({"msg": "Hello, World!"})
+        self.write([{"result": "Fetch file success!"},
+                    {"fileLocation": flocation}])
         # Other methods: self.redirect, self.get_argument, self.request.body,
         #img = Image.open(StringIO.StringIO(file_body))
         #img.save("/img", img.format)
