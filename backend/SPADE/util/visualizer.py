@@ -43,7 +43,7 @@ class Visualizer():
 
         ## convert tensors to numpy arrays
         visuals = self.convert_visuals_to_numpy(visuals)
-                
+
         if self.tf_log: # show images in tensorboard output
             img_summaries = []
             for label, image_numpy in visuals.items():
@@ -73,7 +73,7 @@ class Visualizer():
                 else:
                     img_path = os.path.join(self.img_dir, 'epoch%.3d_iter%.3d_%s.png' % (epoch, step, label))
                     if len(image_numpy.shape) >= 4:
-                        image_numpy = image_numpy[0]                    
+                        image_numpy = image_numpy[0]
                     util.save_image(image_numpy, img_path)
 
             # update website
@@ -128,6 +128,7 @@ class Visualizer():
     def convert_visuals_to_numpy(self, visuals):
         for key, t in visuals.items():
             tile = self.opt.batchSize > 8
+            #print("key: ",key)
             if 'input_label' == key:
                 t = util.tensor2label(t, self.opt.label_nc + 2, tile=tile)
             else:
@@ -135,14 +136,15 @@ class Visualizer():
             visuals[key] = t
         return visuals
 
+
     # save image to the disk
-    def save_images(self, webpage, visuals, image_path):        
-        visuals = self.convert_visuals_to_numpy(visuals)        
-        
+    def save_images(self, webpage, visuals, image_path):
+        visuals = self.convert_visuals_to_numpy(visuals)
+
         image_dir = webpage.get_image_dir()
+        #print("image_dir: ",image_dir)
         short_path = ntpath.basename(image_path[0])
         name = os.path.splitext(short_path)[0]
-
         webpage.add_header(name)
         ims = []
         txts = []
@@ -157,3 +159,11 @@ class Visualizer():
             txts.append(label)
             links.append(image_name)
         webpage.add_images(ims, txts, links, width=self.win_size)
+
+    def save_images_no_webpage(self,image_dir,visual,image_path):
+        tile = self.opt.batchSize > 8
+        visual = util.tensor2im(visual, tile=tile)
+        short_path = ntpath.basename(image_path[0])
+        name = os.path.splitext(short_path)[0]
+        save_path = os.path.join(image_dir, os.path.join("synthesized_image", '%s.png' % (name)))
+        util.save_image(visual, save_path, create_dir=True)
