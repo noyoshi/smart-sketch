@@ -19,6 +19,14 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
 
+class FileHandler(tornado.web.RequestHandler):
+    # This is a file handler
+
+    file_body = self.request.files['filefieldname'][0]['body']
+    img = Image.open(StringIO.StringIO(file_body))
+    img.save("/img", img.format)
+
+
 class MainHandler(BaseHandler):
     def get(self, name=None):  # I *think* name is the sub endpoint?
         # NOTE - if you pass self.write a dictionary, it will automatically write out
