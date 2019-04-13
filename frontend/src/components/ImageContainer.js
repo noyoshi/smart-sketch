@@ -8,19 +8,33 @@ class ImageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { imageAvaliable: false };
+    this.imageUrl = "http://localhost:8888/img/example.jpg";
+  }
+
+  handleUpload(file) {
+    fetch("http://127.0.0.1:8888/upload", {
+      method: "POST",
+      body: file // This is your file object,
+    })
+      .then(response => response.json())
+      .then(
+        success => {
+          this.setState(state => ({
+            imageUrl: success.location
+          }));
+        } // Handle the success response object
+      )
+      .catch(
+        error => console.log(error) // Handle the error response object
+      )
+      .bind(this);
   }
 
   render() {
     return (
       <>
-        <Upload />
-        <Img
-          src={
-            this.imageAvaliable
-              ? "http://localhost:8888/img/placeholder.jpg"
-              : "http://localhost:8888/img/example.jpg"
-          }
-        />
+        <Upload handleUpload={this.handleUpload} />
+        <Img src={this.imageUrl} />
       </>
     );
   }

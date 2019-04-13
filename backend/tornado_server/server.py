@@ -4,6 +4,9 @@ import logging
 import socket
 import sys
 import os
+import uuid
+import subprocess
+# import magic
 
 import tornado.ioloop
 import tornado.web
@@ -12,12 +15,22 @@ import tornado.options
 IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
 
 
+def determine_mimetype(path):
+    try:
+        result = subprocess.check_output(['file', '--mime-type', path])
+    except subprocess.CalledProcessError:
+        result = '{}: text/plain'.format(path)
+
+    return result.decode('utf8').split(':', 1)[-1].strip()
+
+
 class BaseHandler(tornado.web.RequestHandler):
     # This is a handler that will get associated with an endpoint
 
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header("Access-Control-Allow-Headers",
+                        "x-requested-with, Content-Type")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def options(self):
@@ -27,17 +40,25 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 class UploadHandler(BaseHandler):
-    def post(self, name=None):  # I *think* name is the sub endpoint?
+    def post(self, name=None):  # This only recieves one file at a time...
         # NOTE - if you pass self.write a dictionary, it will automatically write out
         # JSON and set the content type to JSON
-        print("recieved a file")
-        pic = self.request.files['file'][0]
-        fname = pic['filename']
+        pic = self.request.body
+        fname = uuid.uuid4().hex
         relative_path = 'img/' + fname
         output_file_path = IMG_FOLDER + '/' + fname
 
-        with open(output_file_path, 'wb') as out_f:
-            out_f.write(pic['body'])
+        # Writes a temp file so we can get the mime type
+        temp = IMG_FOLDER + '/' + 'temp'
+        with open(temp, 'wb') as out_f:
+            out_f.write(pic)
+
+        # Gets the mimetype from the temp file
+        mime_type = determine_mimetype(temp).split('/')[1]
+
+        # Append the mimetype ending to the end of this file, and write it out
+        with open(output_file_path + '.' + mime_type, 'wb') as out_f:
+            out_f.write(pic)
 
         self.write({"result": "success",
                     "location": relative_path})
