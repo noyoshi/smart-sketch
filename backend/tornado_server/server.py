@@ -35,8 +35,8 @@ class MainApplication(tornado.web.Application):
 
         # Add the handlers here - use regular expressions or hardcoded paths to link the endpoints
         # with handlers?
-        self.port = os.environ.get('PORT', 8888)
-        self.address = "0.0.0.0"
+        self.port = 8888
+        self.address = "127.0.0.1"
         self.ioloop = tornado.ioloop.IOLoop.instance()
         self.logger = logging.getLogger()
 
