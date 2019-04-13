@@ -25,12 +25,13 @@
 - Everyone should be able to run the models on their computers
 
 - Function that takes two(?) image files, and runs the model with them
-- Make the drawer for the client that uses the HTML canvas to draw an image, and upload it as a PNG to some endpoint
+- Function that uploads a file to a remote server
+
 - The client can update the image in the browser with a new image it recieves
 
 Once those are done...
 - The server receives the image from the client and writes it to disk
 - The server takes the image from somewhere and runs the model with it (function #1 from above)
 - The server takes the generated image and sends it to the client
-
+- Make the drawer for the client that uses the HTML canvas to draw an image, and upload it as a PNG to some endpoint
 - Sets up the stack for google cloud
