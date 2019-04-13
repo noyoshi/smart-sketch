@@ -22,12 +22,10 @@
 
 
 ## TODOS
-[x] Everyone should be able to run the models on their computers
-
-[x] Function that takes two(?) image files, and runs the model with them
-[x] Function that uploads a file to a remote server
-
-[x] The client can update the image in the browser with a new image it recieves
+- [x] Everyone should be able to run the models on their computers
+- [x] Function that takes two image files, and runs the model with them
+- [x] Function that uploads a file to a remote server
+- [x] The client can update the image in the browser with a new image it recieves
 
 Once those are done...
 - The server receives the image from the client and writes it to disk
