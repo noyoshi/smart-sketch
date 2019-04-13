@@ -7,6 +7,7 @@ import Hero from "./components/Hero";
 import ExampleWrapper from "./components/ExampleWrapper";
 import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
+import Upload from "./components/Uploader/Upload";
 
 import { GoFlame } from "react-icons/go";
 
@@ -20,6 +21,7 @@ class App extends Component {
         <Jumbotron>
           Here is a big jumbotron, with a container underneath
           <Container>
+            <Upload />
             Now I am in the container!
             <div className={styles.App}>
               <header className={styles.App_header}>

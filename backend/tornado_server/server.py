@@ -18,11 +18,24 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Headers", "x-requested-with")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
+    def options(self):
+        # no body
+        self.set_status(204)
+        self.finish()
+
 
 class MainHandler(BaseHandler):
     def get(self, name=None):  # I *think* name is the sub endpoint?
         # NOTE - if you pass self.write a dictionary, it will automatically write out
         # JSON and set the content type to JSON
+        self.write({"msg": "Hello, World!"})
+        # Other methods: self.redirect, self.get_argument, self.request.body,
+
+class UploadHandler(BaseHandler):
+    def post(self, name=None):  # I *think* name is the sub endpoint?
+        # NOTE - if you pass self.write a dictionary, it will automatically write out
+        # JSON and set the content type to JSON
+        print("recieved a file")
         self.write({"msg": "Hello, World!"})
         # Other methods: self.redirect, self.get_argument, self.request.body,
 
@@ -42,7 +55,8 @@ class MainApplication(tornado.web.Application):
 
         # Tie the handlers to the routes here
         self.add_handlers('.*', [
-            (r'.*/(.*)', MainHandler),
+            (r'/', MainHandler),
+            (r'/upload', UploadHandler)
         ])
 
     def run(self):
