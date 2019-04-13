@@ -1,0 +1,17 @@
+../lazy_object_proxy/__init__.py
+../lazy_object_proxy/__pycache__/__init__.cpython-37.pyc
+../lazy_object_proxy/__pycache__/compat.cpython-37.pyc
+../lazy_object_proxy/__pycache__/simple.cpython-37.pyc
+../lazy_object_proxy/__pycache__/slots.cpython-37.pyc
+../lazy_object_proxy/__pycache__/utils.cpython-37.pyc
+../lazy_object_proxy/cext.c
+../lazy_object_proxy/cext.cpython-37m-darwin.so
+../lazy_object_proxy/compat.py
+../lazy_object_proxy/simple.py
+../lazy_object_proxy/slots.py
+../lazy_object_proxy/utils.py
+PKG-INFO
+SOURCES.txt
+dependency_links.txt
+not-zip-safe
+top_level.txt
