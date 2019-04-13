@@ -1,0 +1,21 @@
+matrix:
+  include:
+    - language: python
+      dist: xenial
+      sudo: true
+      python: 3.7.0
+      before_script:
+        - cd backend
+      script:
+        - python -m unittest discover tests "*_test.py"
+
+    - language: node_js
+      node_js:
+        - 10.9.0
+      before_install:
+        - cd frontend
+      install:
+        - yarn install
+      script:
+        # - yarn test
+

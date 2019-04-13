@@ -1,0 +1,86 @@
+/* Import the base variables */
+/* Gathers all the variables from other files */
+/* Dark Greys */
+/* Use these for cards, dropdowns, etc */
+/* Inspired by buildkite's colors */
+/* The fonts to be used in the program */
+/* TODO Reduce the downloads for production! */
+/* There are several different futura fonts, this one is nice for headers */
+@font-face {
+  src: url("../fonts/futur.ttf");
+  font-family: "Futura"; }
+@font-face {
+  src: url("https://fonts.googleapis.com/css?family=Work+Sans:300");
+  font-family: "Work"; }
+/* Light is the best weight for this */
+@font-face {
+  src: url("https://fonts.googleapis.com/css?family=Quicksand:300");
+  font-family: "Quicksand"; }
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+
+.App {
+  text-align: center; }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none; }
+
+.App-header {
+  background-color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  font-family: "Work Sans";
+  font-weight: 300; }
+
+.content {
+  font-family: "Futura";
+  color: black;
+  font-weight: 300; }
+
+.header {
+  font-family: "Futura";
+  color: #00fc89; }
+
+header {
+  font-family: "Futura";
+  color: #00fc89; }
+
+.section {
+  font-family: "Work Sans";
+  color: black; }
+
+.work {
+  font-family: "Work Sans";
+  color: black; }
+
+.futura {
+  font-family: "Futura"; }
+
+.quicksand {
+  font-family: "Quicksand", sans-serif; }
+
+.App-link {
+  color: #61dafb; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+.black {
+  background-color: black; }
+
+/*# sourceMappingURL=App.css.map */

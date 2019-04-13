@@ -1,0 +1,89 @@
+/* Import the base variables */
+
+/* ====================== Pre Processing ========================= */
+@import 'base'
+
+$colors : ( black: $black, white: $white, grey-extra-dark: $grey-extra-dark, grey-dark: $grey-dark, grey-medium: $grey-medium, grey-light: $grey-light, green-light: $green-light, green-medium: $green-medium )
+$text-colors: ( text-light: $text-light, text-medium: $text-medium )
+
+/* generates the component / accent colors placeholder classes */
+@each $name, $color in $colors
+  %#{$name}
+    color: #{$color}
+
+/* Generates the text color placeholder classes*/
+@each $name, $color in $text-colors
+  %#{$name}
+    color: #{$color}
+    
+rubik 
+  font-family: "Rubik", sans-serif
+
+body 
+  @extend rubik
+  font-weight: 300
+  margin: 0
+  padding: 0
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+code 
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
+
+/* ============================================================ */
+
+/* Set links to transition to a color when hovered */
+.link
+  transition-property: color
+  transition-duration: 0.15s
+  transition-timing-function: linear
+
+.link:link 
+  color: inherit    
+
+.link:visited 
+  color: inherit   
+
+.link:hover 
+  color: $green-medium    
+
+.link:active 
+  color: inherit
+
+/* Samples - TODO remove these */
+.header
+  @extend rubik
+  @extend %text-light
+  font-weight: 100
+
+.section
+  @extend rubik
+  @extend %text-light
+
+.work
+  @extend rubik
+  color: $black
+
+.App-link 
+  color: #61dafb
+
+.heroContainer 
+  text-align: center
+  @extend rubik
+  font-size: 80px !important
+  font-weight: 100
+
+.heroText
+  @extend rubik
+  font-weight: 100
+
+.navbar
+  background-color: $grey-light
+
+.bg-transparent
+  background-color: rgba(0, 0, 0, 1)
+
+.appName
+  color: $white
+
+

@@ -1,0 +1,35 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "src/index.js",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "eslint-config-react-app": "^3.0.8",
+    "node-sass": "^4.11.0",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.6",
+    "react-dom": "^16.8.6",
+    "react-icons": "^3.5.0",
+    "react-scripts": "^2.1.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "sass": "node-sass --watch src/styles/sass -o src/styles/css"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "author": "Noah Yoshida",
+  "license": "ISC"
+}

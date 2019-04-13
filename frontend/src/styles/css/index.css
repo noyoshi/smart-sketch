@@ -1,0 +1,76 @@
+/* Import the base variables */
+/* ====================== Pre Processing ========================= */
+/* Gathers all the variables from other files */
+/* Dark Greys */
+/* Use these for cards, dropdowns, etc */
+/* Inspired by buildkite's colors, accent colors */
+/* text colors */
+/* The fonts to be used in the program */
+/* This is the best font use this one! */
+@font-face {
+  src: url("https://use.typekit.net/ymw8ood.css");
+  font-family: 'Rubik'; }
+
+/* generates the component / accent colors placeholder classes */
+/* Generates the text color placeholder classes*/
+.header, .section {
+  color: #626567; }
+
+rubik, body, .header, .section, .work, .heroContainer, .heroText {
+  font-family: "Rubik", sans-serif; }
+
+body {
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+
+/* ============================================================ */
+/* Set links to transition to a color when hovered */
+.link {
+  transition-property: color;
+  transition-duration: 0.15s;
+  transition-timing-function: linear; }
+
+.link:link {
+  color: inherit; }
+
+.link:visited {
+  color: inherit; }
+
+.link:hover {
+  color: #00cc65; }
+
+.link:active {
+  color: inherit; }
+
+/* Samples - TODO remove these */
+.header {
+  font-weight: 100; }
+
+.work {
+  color: black; }
+
+.App-link {
+  color: #61dafb; }
+
+.heroContainer {
+  text-align: center;
+  font-size: 80px !important;
+  font-weight: 100; }
+
+.heroText {
+  font-weight: 100; }
+
+.navbar {
+  background-color: #26292b; }
+
+.bg-transparent {
+  background-color: black; }
+
+.appName {
+  color: white; }
