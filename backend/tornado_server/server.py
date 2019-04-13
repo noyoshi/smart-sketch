@@ -24,12 +24,19 @@ class BaseHandler(tornado.web.RequestHandler):
         self.finish()
 
 
-class FileHandler(tornado.web.RequestHandler):
-    # This is a file handler
-
-    file_body = self.request.files['filefieldname'][0]['body']
-    img = Image.open(StringIO.StringIO(file_body))
-    img.save("/img", img.format)
+class UploadHandler(BaseHandler):
+    def post(self, name=None):  # I *think* name is the sub endpoint?
+        # NOTE - if you pass self.write a dictionary, it will automatically write out
+        # JSON and set the content type to JSON
+        print("recieved a file")
+        pic = self.request.files['file'][0]
+        fname = pic['filename']
+        output_file = open("img/" + fname, 'wb')
+        output_file.write(pic['body'])
+        self.write({"msg": "Hello, World!"})
+        # Other methods: self.redirect, self.get_argument, self.request.body,
+        #img = Image.open(StringIO.StringIO(file_body))
+        #img.save("/img", img.format)
 
 
 class MainHandler(BaseHandler):
