@@ -12,6 +12,7 @@ from models.pix2pix_model import Pix2PixModel
 from util.visualizer import Visualizer
 from util import html
 
+# opt = argparse.Namespace
 opt = TestOptions().parse()
 
 dataloader = data.create_dataloader(opt)

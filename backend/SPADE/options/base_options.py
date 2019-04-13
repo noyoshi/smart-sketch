@@ -77,6 +77,7 @@ class BaseOptions():
             parser = self.initialize(parser)
 
         # get the basic options
+        # opt = argparse.Namespace
         opt, unknown = parser.parse_known_args()
 
         # modify model-related parser options
