@@ -1,6 +1,6 @@
 .colorButtons {
     display: block;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 canvas {
@@ -9,15 +9,15 @@ canvas {
 
 div#sidebar {
     position: absolute;
-    left: 0;
-    width: 150px;
+    left: 20px;
+    width: 200px;
     padding: 20px 20px;
     top: 0;
 }
 
 canvas#canvas {
-    left: 150px;
-    top: 45px;
+    left: 300px;
+    top: 60px;
 }
 
 .btn {

@@ -6,16 +6,16 @@
 <body>
     <div id="sidebar">
         <div class="colorButtons">
-            <h3>Colour</h3>
-            <input type="color" id="colorpicker" value="#c81464" class="colorpicker">
+            <h4>Pen Color</h4>
+            <input type="color" id="colorpicker" value="#51CCFF" class="colorpicker">
         </div>
         <div class="colorButtons">
-            <h3>Bg Color</h3>
+            <h4>Backgound Color</h4>
             <input type="color" value="#ffffff" id="bgcolorpicker" class="colorpicker">
         </div>
 
         <div class="toolsButtons">
-            <h3>Tools</h3>
+            <h4>Tools</h4>
             <button id="eraser" class="btn btn-default"><span class="glyphicon glyphicon-erase"
                     aria-hidden="true"></span></button>
             <button id="clear" class="btn btn-danger"> <span class="glyphicon glyphicon-repeat"
@@ -23,31 +23,31 @@
         </div>
 
         <div class="buttonSize">
-            <h3>Size (<span id="showSize">5</span>)</h3>
+            <h4>Brush Size *<span id="showSize">5</span>*</h4>
             <input type="range" min="1" max="50" value="5" step="1" id="controlSize">
         </div>
 
         <div class="canvasSize">
-            <h3>Canvas</h3>
+            <h4>Canvas</h4>
             <div class="input-group">
                 <span class="input-group-addon">X</span>
                 <input type="number" id="sizeX" class="form-control" placeholder="sizeX" value="800" class="size">
             </div>
             <div class="input-group">
                 <span class="input-group-addon">Y</span>
-                <input type="number" id="sizeY" class="form-control" placeholder="sizeY" value="800" class="size">
+                <input type="number" id="sizeY" class="form-control" placeholder="sizeY" value="500" class="size">
             </div>
             <input type="button" class="updateSize btn btn-success" value="Update" id="canvasUpdate">
         </div>
-        <div class="Storage">
+        <!-- <div class="Storage">
             <h3>Storage</h3>
             <input type="button" value="Save" class="btn btn-warning" id="save">
             <input type="button" value="Load" class="btn btn-warning" id="load">
             <input type="button" value="Clear" class="btn btn-warning" id="clearCache">
-        </div>
+        </div> -->
         <div class="extra">
-            <h3>Extra</h3>
-            <a id="saveToImage" class="btn btn-warning">Download</a>
+            <h4>Download</h4>
+            <a id="saveToImage" class="btn btn-warning">Save Image</a>
         </div>
 
     </div>
