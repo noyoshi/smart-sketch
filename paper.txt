@@ -1,0 +1,15 @@
+SPADE
+
+Research Focus: Converting a semantic segmentation mask to a photorealistic image.
+The paper address that the conventional network architecture (built by stacking convolutional, normalization, and nonlinearity layers) is sub-optimal, 
+because their normalization layers tend to “wash away” information in input semantic masks. To improve the model, the authors proposed spatially-adaptive normalization, 
+a conditional normalization layer that modulates the activations using input semantic layouts through a spatially adaptive, learned transformation, and can effectively propagate the semantic information throughout the network.
+
+Related Studies: Deep generative models (GAN, VAE); Conditional image synthesis; Unconditional normalization layers (LRN, IN); Conditional normalization layers (Conditional BN, AdaIN)
+
+Semantic Image Synthesis:
+Aims to learn a mapping function that can convert an input segmentation mask m to a photorealistic image.
+It works better because it preserves semantic information against common normalization layers.
+
+* The model also attains multimodal synthesis capability when trained with the image encoder. By using different random noise, 
+the model synthesizes outputs with different appearances but same semantic layouts depicted in the input mask.
