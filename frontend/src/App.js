@@ -19,38 +19,11 @@ class App extends Component {
         <MyNavBar />
         <Hero />
         <Jumbotron>
-          Here is a big jumbotron, with a container underneath
           <Container>
-            <Upload />
-            Now I am in the container!
             <div className={styles.App}>
               <header className={styles.App_header}>
-                <ExampleWrapper url="localhost:8888" />
-                <h2 className={styles.header}>Header Content With Futura</h2>
-                <h5 className={styles.section}>Section Header</h5>
-                <p className={styles.work}>
-                  This is content written with the work sans font. The brown fox
-                  jumped over the large lake
-                </p>
-                <p className={styles.section}>
-                  MENU written with the Futura. The brown fox jumped over the
-                  large lake
-                </p>
-                <p className={styles.libre}>
-                  CAPS This is content written with the libre franklin font. The
-                  brown fox jumped over the large lake <GoFlame />
-                </p>
-                <p>
-                  Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                  className={styles.link}
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn React
-                </a>
+                <h2 className={styles.header}>Upload your file here!</h2>
+                <Upload />
               </header>
             </div>
           </Container>

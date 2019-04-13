@@ -6,7 +6,7 @@ class Hero extends Component {
   render() {
     return (
       <div className={styles.heroContainer}>
-        <p className={styles.heroText}>This is where the hero goes</p>
+        <p className={styles.heroText}>GuaGAN - Generate Realistic Images from Sketches</p>
       </div>
     );
   }

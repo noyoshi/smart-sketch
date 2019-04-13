@@ -31,7 +31,7 @@ class MyNavBar extends Component {
           <Navbar.Brand href="#home">
             <div className="appName">
               <GoFlame />
-              {" App Name"}
+              {" GuaGAN"}
             </div>
           </Navbar.Brand>
         </Navbar>

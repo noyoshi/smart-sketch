@@ -35,3 +35,9 @@ Once those are done...
 - The server takes the generated image and sends it to the client
 - Make the drawer for the client that uses the HTML canvas to draw an image, and upload it as a PNG to some endpoint
 - Sets up the stack for google cloud
+
+#### Credits
+- https://github.com/LukasMarx/react-file-upload
+- https://nvlabs.github.io/SPADE/
+- https://arxiv.org/abs/1903.07291
+- https://github.com/nvlabs/spade/
