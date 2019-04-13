@@ -9,6 +9,8 @@ import tornado.ioloop
 import tornado.web
 import tornado.options
 
+IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
+
 
 class BaseHandler(tornado.web.RequestHandler):
     # This is a handler that will get associated with an endpoint
@@ -31,20 +33,23 @@ class UploadHandler(BaseHandler):
         print("recieved a file")
         pic = self.request.files['file'][0]
         fname = pic['filename']
-        output_file = open("img/" + fname, 'wb')
-        output_file.write(pic['body'])
-        self.write({"msg": "Hello, World!"})
-        # Other methods: self.redirect, self.get_argument, self.request.body,
-        #img = Image.open(StringIO.StringIO(file_body))
-        #img.save("/img", img.format)
+        relative_path = 'img/' + fname
+        output_file_path = IMG_FOLDER + '/' + fname
+
+        with open(output_file_path, 'wb') as out_f:
+            out_f.write(pic['body'])
+
+        self.write({"result": "success",
+                    "location": relative_path})
 
 
 class MainHandler(BaseHandler):
-    def get(self, name=None):  # I *think* name is the sub endpoint?
+    def get(self, path, name=None):  # I *think* name is the sub endpoint?
         # NOTE - if you pass self.write a dictionary, it will automatically write out
         # JSON and set the content type to JSON
         self.write({"msg": "Hello, World!"})
         # Other methods: self.redirect, self.get_argument, self.request.body,
+
 
 class MainApplication(tornado.web.Application):
     def __init__(self, **settings):
@@ -62,7 +67,8 @@ class MainApplication(tornado.web.Application):
         # Tie the handlers to the routes here
         self.add_handlers('.*', [
             (r'/', MainHandler),
-            (r'/upload', UploadHandler)
+            (r'/upload', UploadHandler),
+            (r'/img/(.*)', tornado.web.StaticFileHandler, {'path': IMG_FOLDER})
         ])
 
     def run(self):

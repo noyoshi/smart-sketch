@@ -71,8 +71,8 @@ class Upload extends Component {
       });
 
       req.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-          callback(request.responseText); // Another callback here
+        if (req.readyState == 4 && req.status == 200) {
+          console.log(req.responseText); // Another callback here
         }
       };
 

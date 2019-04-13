@@ -8,6 +8,7 @@ import ExampleWrapper from "./components/ExampleWrapper";
 import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { GoFlame } from "react-icons/go";
+import ImageContainer from "./components/ImageContainer";
 
 class App extends Component {
   render() {
