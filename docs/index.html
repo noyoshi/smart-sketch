@@ -23,9 +23,9 @@
   <body>
     <!-- Navigation -->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <nav class="navbar navbar-expand-lg navbar-dark static-top dark-background">
       <div class="container">
-        <a class="navbar-brand rubik" href="#">Smart Sketch</a>
+        <a class="navbar-brand rubik branding" href="#">Smart Sketch </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -40,10 +40,20 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link rubik" data-toggle="modal" data-target="#GuideModal">Guide</a>
+              <a
+                class="nav-link rubik"
+                data-toggle="modal"
+                data-target="#GuideModal"
+                >Guide</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link rubik" data-toggle="modal" data-target="#ContactModal">Contact</a>
+              <a
+                class="nav-link rubik"
+                data-toggle="modal"
+                data-target="#ContactModal"
+                >Contact</a
+              >
             </li>
           </ul>
         </div>
@@ -55,27 +65,34 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <div id="sidebar">
+            <div id="sidebar" class="sidebar">
               <div class="colorButtons">
-                <h5>Pen Color</h5>
+                <h4 class="rubik">Pen Color</h4>
                 <input class="color-picker cp-sm" id="colorpicker" />
               </div>
               <div class="toolsButtons">
-                <h5>Tools</h5>
+                <h4 class="rubik">Tools</h4>
                 <button id="eraser" class="btn btn-danger">
-                  <span class="glyphicon glyphicon-erase" aria-hidden="true"
+                  <span
+                    class="glyphicon glyphicon-erase rubik"
+                    aria-hidden="true"
                     >Erase</span
                   >
                 </button>
                 <button id="clear" class="btn btn-danger">
-                  <span class="glyphicon glyphicon-repeat" aria-hidden="true"
+                  <span
+                    class="glyphicon glyphicon-repeat rubik"
+                    aria-hidden="true"
                     >Clear</span
                   >
                 </button>
               </div>
 
               <div class="buttonSize">
-                <h5>Brush Size *<span id="showSize">5</span>*</h5>
+                <h4 class="rubik">
+                  Brush Size (<span id="showSize">5</span>*)
+                </h4>
+
                 <input
                   type="range"
                   min="1"
@@ -87,64 +104,87 @@
               </div>
 
               <div class="extra">
-                <h5>Upload</h5>
+                <h4 class="rubik">Upload</h4>
                 <a id="uploadimage" class="btn btn-warning">Convert to photo</a>
               </div>
             </div>
           </div>
           <div class="col" id="container_col"></div>
           <div class="col">
-            <img
-              class="image"
-              src="http://0.0.0.0:8888/img/placeholder.png"
-              height="100%"
-              width="100%"
-              id="image"
-            />
+            <img class="image" src="" height="100%" width="100%" id="image" />
+          </div>
+        </div>
+        <p class="tips rubik">
+          <i
+            >Tips and tricks! Try to make sure the entire canvas is converd with
+            some color before submitting!</i
+          >
+        </p>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="page-footer font-small blue">
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">
+        GuaGAN and SPADE code used courtesy of NVIDIA Corporation. Original
+        source code can be found
+        <a href="https://github.com/NVlabs/SPADE/">here</a> with the paper
+        <a href="https://arxiv.org/abs/1903.07291">here</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="GuideModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Guide</h5>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              This is a web interface that converts human sketches to
+              photorealistic images.
+            </p>
+            <p>
+              Use the drawing pad on the left to draw, then click "Convert to
+              photo" to see magic happen! 😊
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="GuideModal" role="dialog">
-        <div class="modal-dialog">
-    
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Guide</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>This is a web interface that converts human sketches to photorealistic images.</p>
-                    <p>Use the drawing pad on the left to draw, then click "Convert to photo" to see magic happen! 😊</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="ContactModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Contact</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Our GitHub repo is https://github.com/noyoshi/hacksc</p>
-                    <p>ree feel to contact us!</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Contact</h5>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Our GitHub repo is https://github.com/noyoshi/smart-sketch</p>
+            <p>Feel free to contact us!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Bootstrap core JavaScript -->

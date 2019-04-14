@@ -5,11 +5,28 @@
 
 .rubik {
   font-family: "Rubik", sans-serif;
+  font-weight: 100;
+}
+
+.branding {
+  font-size: 30px;
+}
+
+.dark-background {
+  background-color: rgb(24, 25, 27);
 }
 
 .colorButtons {
   display: block;
   margin: 5px 0px;
+}
+
+.sidebar {
+  text-align: center;
+}
+
+h4 {
+  margin-bottom: 16px;
 }
 
 canvas {
@@ -27,7 +44,7 @@ canvas#canvas {
 }
 
 .container {
-  max-width: 1300px;
+  max-width: 1380px;
 }
 
 .image {
@@ -48,7 +65,14 @@ input {
 .input-group {
   margin-bottom: 10px;
 }
+.toolsButtons {
+  margin-bottom: 10px;
+}
 
+.tips {
+  margin-top: 20px;
+  text-align: center;
+}
 .toolsButtons .btn {
   width: 48%;
 }

@@ -9,7 +9,8 @@ currentSize = 5;
 var currentColor = "#759edf";
 var currentBg = "white";
 
-var baseIP = "35.247.100.91";
+// var baseIP = "35.247.100.91";
+var baseIP = "0.0.0.0:8888";
 
 // INITIAL LAUNCH
 
@@ -83,7 +84,9 @@ jQuery(document).ready(function($) {
             $color_list[i].color +
             '" title="' +
             $color_list[i].title +
-            '"></li>'
+            '">&nbsp&nbsp' +
+            $color_list[i].title +
+            "&nbsp&nbsp</li>"
         );
     }
 
