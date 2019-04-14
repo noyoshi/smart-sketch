@@ -32,8 +32,8 @@ document.getElementById('controlSize').addEventListener('change', function () {
   currentSize = this.value;
   document.getElementById("showSize").innerHTML = this.value;
 });
-document.getElementById('saveToImage').addEventListener('click', function () {
-  downloadCanvas(this, 'canvas', 'masterpiece.png');
+document.getElementById('uploadimage').addEventListener('click', function () {
+  upload('canvas');
 }, false);
 document.getElementById('eraser').addEventListener('click', eraser);
 document.getElementById('clear').addEventListener('click', createCanvas);
@@ -85,6 +85,21 @@ function createCanvas() {
 function downloadCanvas(link, canvas, filename) {
   link.href = document.getElementById(canvas).toDataURL();
   link.download = filename;
+}
+
+// UPLOAD CANVAS 
+
+function upload(canvas) {
+  var dataURL = canvas.toDataURL();
+  $.ajax({
+    type: "POST",
+    url: "/upload",
+    data: {
+      imgBase64: dataURL
+    }
+  }).done(function (o) {
+    console.log('upload file');
+  });
 }
 
 // SAVE FUNCTION
