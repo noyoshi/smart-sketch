@@ -1,0 +1,13 @@
+.color-picker-wrap li{list-style: none;}
+.color-picker-wrap ul{width: 100%;padding: 1;display:inline-block;margin-bottom:0;}
+.color-picker-wrap li{border: 1px dotted #333333; position:relative;float:left;width:32px;height:32px;margin:3px 3px 0px 0px;background:#000;cursor:pointer;filter:alpha(opacity=50);opacity:.5;-webkit-transition:opacity .2s;-moz-transition:opacity .2s;-ms-transition:opacity .2s;-o-transition:opacity .2s;transition:opacity .2s;}
+.color-picker-wrap li:hover{filter:alpha(opacity=100);opacity:1}
+.color-picker-wrap li.active{width:32px;height:32px;filter:alpha(opacity=100);opacity:1;border-style: solid;}
+.color-picker-wrap li.add_new{ background:#fff;border: 1px dotted #333333; text-align:center;line-height: 32px;font-size:24px;}
+.color-picker-wrap.cp-sm li{width:24px;height:25px;}
+.color-picker-wrap.cp-sm li.active{height:25px;}
+.color-picker-wrap.cp-sm li.add_new{ line-height: 24px;font-size:16px;}
+.color-picker-wrap.cp-lg li{width:48px;height:48px;}
+.color-picker-wrap.cp-lg li.active{height:52px;}
+.color-picker-wrap.cp-lg li.add_new{ line-height: 48px;font-size:40px;}
+.color-picker-wrap .color-picker{display:none;}

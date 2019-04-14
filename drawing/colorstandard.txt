@@ -1,0 +1,15 @@
+#384f83     sea
+#efefef     cloud
+#2c1e16     dirt
+#5d6e32     bush
+#b7d24e     grass
+#3c3b4b     mountain
+#987e6a     road
+#759edf     sky-other
+#352613     tree
+#636363     pavement
+#e670b6     flower
+#c1c3c9     fog
+#776c2d     hill
+#bf602c     leaves
+#32604d     river

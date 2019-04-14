@@ -3,13 +3,16 @@
 
 <link rel="stylesheet" href="style.css">
 
+<link rel="stylesheet" href="color-picker.css">
+
 <body>
     <div id="sidebar">
         <div class="colorButtons">
             <h4>Pen Color</h4>
-            <input type="color" list="presetColors" id="colorpicker" value="#759edf" class="colorpicker">
+            <input class="color-picker cp-sm" id="colorpicker">
+            <!-- <input type="color" list="presetColors" id="colorpicker" value="#759edf" class="colorpicker">
             <datalist id="presetColors">
-                <option>#384f83</option>/>
+                <option>#384f83</option>
                 <option>#efefef</option>
                 <option>#2c1e16</option>
                 <option>#5d6e32</option>
@@ -24,30 +27,10 @@
                 <option>#776c2d</option>
                 <option>#bf602c</option>
                 <option>#32604d</option>
-            </datalist>
+            </datalist> -->
             <!-- <input type="color" id="colorpicker" value="#51CCFF" class="colorpicker"> -->
         </div>
-        <div class="colorButtons">
-            <h4>Backgound Color</h4>
-            <input type="color" list="presetColors" value="#ffffff" id="bgcolorpicker" class="colorpicker">
-            <datalist id="presetColors">
-                <option>#384f83</option>/>
-                <option>#efefef</option>
-                <option>#2c1e16</option>
-                <option>#5d6e32</option>
-                <option>#b7d24e</option>
-                <option>#3c3b4b</option>
-                <option>#987e6a</option>
-                <option>#759edf</option>
-                <option>#352613</option>
-                <option>#636363</option>
-                <option>#e670b6</option>
-                <option>#c1c3c9</option>
-                <option>#776c2d</option>
-                <option>#bf602c</option>
-                <option>#32604d</option>
-            </datalist>
-        </div>
+        
 
         <div class="toolsButtons">
             <h4>Tools</h4>
@@ -87,5 +70,7 @@
 
     </div>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="index.js"></script>
