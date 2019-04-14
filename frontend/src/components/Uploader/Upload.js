@@ -70,6 +70,12 @@ class Upload extends Component {
         reject(req.response);
       });
 
+      req.onreadystatechange = function() {
+        if (req.readyState == 4 && req.status == 200) {
+          console.log(req.responseText); // Another callback here
+        }
+      };
+
       const formData = new FormData();
       formData.append("file", file, file.name);
 
