@@ -105,7 +105,7 @@ jQuery(document).ready(function ($) {
 
     }
 
-    self.children('ul').append('<li class="add_new" title="Add New">+</li>');
+    // self.children('ul').append('<li class="add_new" title="Add New">+</li>');
 
   });
 
@@ -114,7 +114,7 @@ jQuery(document).ready(function ($) {
 
     var self = $(this);
 
-    if (!self.hasClass('add_new')) {
+    // if (!self.hasClass('add_new')) {
 
       if (!self.hasClass('active')) {
 
@@ -130,9 +130,9 @@ jQuery(document).ready(function ($) {
         self.addClass('active');
 
       }
-    } else {
-      self.parents('.color-picker-wrap').children("input[type='color']").trigger('click');
-    }
+    // } else {
+    //   self.parents('.color-picker-wrap').children("input[type='color']").trigger('click');
+    // }
 
   });
 
@@ -142,13 +142,13 @@ jQuery(document).ready(function ($) {
 
     self.parents('.color-picker-wrap').children('ul').children('li').removeClass('active');
 
-    self.parents('.color-picker-wrap').children('ul').children('li.add_new').remove();
+    // self.parents('.color-picker-wrap').children('ul').children('li.add_new').remove();
 
     self.parents('.color-picker-wrap').children('ul').append('<li class="active" title="Custom Color ' + self.val() + '" style="background-color:' + self.val() + '"></li>');
 
     self.parents('.color-picker-wrap').children(".color-picker").val(self.val());
 
-    self.parents('.color-picker-wrap').children('ul').append('<li class="add_new" title="Add New">+</li>');
+    // self.parents('.color-picker-wrap').children('ul').append('<li class="add_new" title="Add New">+</li>');
 
     if (self.parents('.color-picker-wrap').children(".color-picker").hasClass('cp-show')) {
 
