@@ -345,11 +345,11 @@ function mousedown(canvas, evt) {
 function mousemove(canvas, evt) {
   if (isMouseDown) {
     var currentPosition = getMousePos(canvas, evt);
-    if (currentPosition.x > canvas.width) {
-      console.log("far off");
-      isMouseDown = false;
-      return;
-    }
+    // if (currentPosition.x > canvas.width || currentPosition.y > canvas.height) {
+    //   console.log("far off");
+    //   isMouseDown = false;
+    //   return;
+    // }
     ctx.lineTo(currentPosition.x, currentPosition.y);
     ctx.stroke();
     store(currentPosition.x, currentPosition.y, currentSize, currentColor);
