@@ -1,6 +1,7 @@
 # SmartSketch
 ## Supercharge your creativity with state of the art image synthesis
 
+![promo.png](promo.png)
 ### Background
 A few months ago, some of us saw [the NVIDIA demo of their GuaGAN model](https://www.youtube.com/watch?v=p5U4NgVGAwg&feature=youtu.be) for semantic image synthesis. It blew us away. Unfortunately, unlike their StyleGAN model, they did not quickly release the source code, and everyone was left wanting more of this breakthrough tech. 
 
