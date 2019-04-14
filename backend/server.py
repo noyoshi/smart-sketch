@@ -16,15 +16,22 @@ LABEL_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_label')
 
 # This is where the image will go 
 EXPORT_LOCATION = os.path.join(os.path.dirname(__file__), 'results/coco_pretrained/test_latest/images/synthesized_image')
-
+STATIC_IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
 
 def run_model(filepath):
     '''Runs the pretrained COCO model'''
     # TODO check to see if this goes any faster with GPUS enabled...
+    # TODO make is it so that concurrent users won't mess with eachother :P aka have hashed or something dataset routes...
+    # that will also take a lot of cleaning up...
     command_string = "python3 test.py --name coco_pretrained --dataset_mode coco --dataroot dataset/ --gpu_ids -1 --no_pairing_check"
     command = command_string.split(' ')
     result = subprocess.check_output(command)
+    return EXPORT_LOCATION + '/' + 'avon.png'
 
+def move_file(old="avon.png", new="avon.png"):
+    command_string = "cp " + EXPORT_LOCATION + "/" + old
+    command_string += " " + STATIC_IMG_FOLDER + "/" + new
+    result = subprocess.check_output(command_string.split(' '))
 
 class BaseHandler(tornado.web.RequestHandler):
     # This is a handler that will get associated with an endpoint
@@ -56,12 +63,13 @@ class UploadHandler(BaseHandler):
         with open(output_file_path, 'wb') as out_f:
             out_f.write(pic['body'])
 
-        run_model('')
+        image_location = run_model('')
+        move_file()
 
         # TODO change the relative path here to be the path to the image generated - IE 
         # the thingy you generated earlier...
         self.write({"result": "success",
-                    "location": relative_path})
+                    "location": image_location})
 
 
 class MainHandler(BaseHandler):
@@ -89,7 +97,7 @@ class MainApplication(tornado.web.Application):
         self.add_handlers('.*', [
             (r'/', MainHandler),
             (r'/upload', UploadHandler),
-            (r'/img/(.*)', tornado.web.StaticFileHandler, {'path': IMG_FOLDER})
+            (r'/img/(.*)', tornado.web.StaticFileHandler, {'path': STATIC_IMG_FOLDER})
         ])
 
     def run(self):
