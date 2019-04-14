@@ -16,7 +16,7 @@ IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_img')
 INST_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_inst')
 LABEL_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_label')
 
-# This is where the image will go 
+# This is where the image will go
 EXPORT_LOCATION = os.path.join(os.path.dirname(__file__), 'results/coco_pretrained/test_latest/images/synthesized_image')
 STATIC_IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
 
@@ -49,24 +49,20 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 class UploadHandler(BaseHandler):
-    def post(self, name=None):  # I *think* name is the sub endpoint?
-        # NOTE - if you pass self.write a dictionary, it will automatically write out
-        # JSON and set the content type to JSON
+    def post(self, name=None):
         # TODO Fix this with how we will be getting the file from the front end...
 
         # TODO change the way that we save the model?
-        print("recieved a file")
         pic = str(self.request.body)
         # print(pic.split(','))
         base64_string = pic.split(',')[1]
         img_data = base64.b64decode(base64_string)
         color_fname = "color.png"
-        # TODO determine the mimetype... frick. but its always a png so its ok?
         # relative_path = 'img/' + color_fname
         output_color_file = STATIC_IMG_FOLDER + '/' + color_fname
-        
+
         # Writes the color image
-        with open(output_color_file, 'wb') as out_f:
+        with open(output_color_file, 'wb+') as out_f:
             out_f.write(img_data)
 
         greyscale_fname = "greyscale.png"
@@ -76,23 +72,26 @@ class UploadHandler(BaseHandler):
 
         # Converts the file to greyscale and saves it to the inst folder?
         color_to_grey.convert_rgb_image_to_greyscale(output_color_file, ouptut_greyscale_file)
-        
+
         ouptut_greyscale_file_labels = LABEL_FOLDER + '/' + greyscale_fname
 
         copy_file(ouptut_greyscale_file, ouptut_greyscale_file_labels)
-        
+
         ouptut_greyscale_file_img = IMG_FOLDER + '/' + greyscale_fname
         copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
 
         # We shouldnt need to pass it a string anymore
-        image_location = run_model(greyscale_fname)
-        image_location = "boo"
-        # copy_file()
+        _ = run_model(greyscale_fname)
+        # Where is the final image??
+        
+        current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
+        export_image_location = STATIC_IMG_FOLDER + "/" + greyscale_fname
+        copy_file(current_image_location, export_image_location)
 
-        # TODO change the relative path here to be the path to the image generated - IE 
+        # TODO change the relative path here to be the path to the image generated - IE
         # the thingy you generated earlier...
         self.write({"result": "success",
-                    "location": image_location})
+                    "location": export_image_location})
 
 
 class MainHandler(BaseHandler):

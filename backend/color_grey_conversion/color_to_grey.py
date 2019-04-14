@@ -2,16 +2,12 @@ from PIL import Image
 
 #sub 1 to actual value
 
-
-
-
 def convert_rgb_image_to_greyscale(input_file, output_file):
-    rgb_to_grey_dict = {}
     label_to_grey = {}
     label_to_rgb = {}
     rgb_to_label = {}
     label_to_rgb["sea"] = (56,79,131)
-    label_to_rgb["cloud"] = (239,239,239)
+    label_to_rgb["clouds"] = (239,239,239)
     label_to_rgb["dirt"] = (44,30,22)
     label_to_rgb["bush"] = (93,110,50)
     label_to_rgb["grass"] = (183,210,78)
@@ -47,9 +43,6 @@ def convert_rgb_image_to_greyscale(input_file, output_file):
                 grey = label_to_grey[label]
             p_o[i,j] = grey
     out_img.save(output_file)
-
-
-
 
 
 def main():
