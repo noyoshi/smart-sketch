@@ -76,7 +76,7 @@ class UploadHandler(BaseHandler):
 
         # Converts the file to greyscale and saves it to the inst folder?
         color_to_grey.convert_rgb_image_to_greyscale(output_color_file, ouptut_greyscale_file)
-
+        
         ouptut_greyscale_file_labels = LABEL_FOLDER + '/' + greyscale_fname
 
         copy_file(ouptut_greyscale_file, ouptut_greyscale_file_labels)
