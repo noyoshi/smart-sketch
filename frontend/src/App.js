@@ -7,9 +7,8 @@ import Hero from "./components/Hero";
 import ExampleWrapper from "./components/ExampleWrapper";
 import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import Upload from "./components/Uploader/Upload";
-
 import { GoFlame } from "react-icons/go";
+import ImageContainer from "./components/ImageContainer";
 
 class App extends Component {
   render() {
@@ -23,7 +22,7 @@ class App extends Component {
             <div className={styles.App}>
               <header className={styles.App_header}>
                 <h2 className={styles.header}>Upload your file here!</h2>
-                <Upload />
+                <ImageContainer />
               </header>
             </div>
           </Container>
