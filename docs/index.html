@@ -39,10 +39,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link rubik" href="#">Guide</a>
+              <a class="nav-link rubik" data-toggle="modal" data-target="#GuideModal">Guide</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link rubik" href="#">Contact</a>
+              <a class="nav-link rubik" data-toggle="modal" data-target="#ContactModal">Contact</a>
             </li>
           </ul>
         </div>
@@ -72,6 +72,47 @@
             <div class="extra">
                 <h5>Upload</h5>
                 <a id="uploadimage" class="btn btn-warning">Convert to photo</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="GuideModal" role="dialog">
+        <div class="modal-dialog">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Guide</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>This is a web interface that converts human sketches to photorealistic images.</p>
+                    <p>Use the drawing pad on the left to draw, then click "Convert to photo" to see magic happen! 😊</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ContactModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contact</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Our GitHub repo is https://github.com/noyoshi/hacksc</p>
+                    <p>ree feel to contact us!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
