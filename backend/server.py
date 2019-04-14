@@ -21,14 +21,14 @@ EXPORT_LOCATION = os.path.join(os.path.dirname(__file__), 'results/coco_pretrain
 STATIC_IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
 
 def check_for_dataset_folder():
-    if not os.path.isdir("/dataset/"):
-        os.mkdir("/dataset/")
-    if not os.path.isdir("/dataset/val_img"):
-        os.mkdir("/dataset/val_img")
-    if not os.path.isdir("/dataset/val_inst"):
-        os.mkdir("/dataset/val_inst")
-    if not os.path.isdir("/dataset/val_label"):
-        os.mkdir("/dataset/val_label")
+    if not os.path.isdir("dataset/"):
+        os.mkdir("dataset/")
+    if not os.path.isdir("dataset/val_img"):
+        os.mkdir("dataset/val_img")
+    if not os.path.isdir("dataset/val_inst"):
+        os.mkdir("dataset/val_inst")
+    if not os.path.isdir("dataset/val_label"):
+        os.mkdir("dataset/val_label")
 
 def run_model(filename):
     '''Runs the pretrained COCO model'''
@@ -63,6 +63,7 @@ class UploadHandler(BaseHandler):
         # TODO Fix this with how we will be getting the file from the front end...
 
         # TODO change the way that we save the model?
+        self.application.logger.info("Recieved a file")
         pic = str(self.request.body)
         # print(pic.split(','))
         base64_string = pic.split(',')[1]
@@ -125,6 +126,7 @@ class MainApplication(tornado.web.Application):
         self.ioloop = tornado.ioloop.IOLoop.instance()
         self.logger = logging.getLogger()
 
+
         # Tie the handlers to the routes here
         self.add_handlers('.*', [
             (r'/', MainHandler),
@@ -144,6 +146,7 @@ class MainApplication(tornado.web.Application):
 
 
 if __name__ == "__main__":
+    check_for_dataset_folder()
     tornado.options.define('debug', default=False,
                            help='Enable debugging mode.')
 
