@@ -9,22 +9,17 @@ import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { GoFlame } from "react-icons/go";
 import ImageContainer from "./components/ImageContainer";
+import UploadWrapper from "./components/UploadWrapper";
 
 class App extends Component {
   render() {
-    console.log(styles.black);
     return (
       <div>
         <MyNavBar />
         <Hero />
         <Jumbotron>
           <Container>
-            <div className={styles.App}>
-              <header className={styles.App_header}>
-                <h2 className={styles.header}>Upload your file here!</h2>
-                <ImageContainer />
-              </header>
-            </div>
+            <UploadWrapper />
           </Container>
         </Jumbotron>
       </div>
