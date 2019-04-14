@@ -75,6 +75,7 @@ def export_image(greyscale_fname):
         current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
         export_image_location = STATIC_IMG_FOLDER + "/" + greyscale_fname
         copy_file(current_image_location, export_image_location)
+        return export_image_location
 
 class UploadHandler(BaseHandler):
     def post(self, name=None):
@@ -102,7 +103,7 @@ class UploadHandler(BaseHandler):
         _ = run_model(greyscale_fname)
         # Where is the final image??
 
-        export_image(greyscale_fname)
+        export_image_location = export_image(greyscale_fname)
 
         # TODO change the relative path here to be the path to the image generated - IE
         # the thingy you generated earlier...
