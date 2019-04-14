@@ -20,6 +20,16 @@ LABEL_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_label')
 EXPORT_LOCATION = os.path.join(os.path.dirname(__file__), 'results/coco_pretrained/test_latest/images/synthesized_image')
 STATIC_IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
 
+def check_for_dataset_folder():
+    if not os.path.isdir("/dataset/"):
+        os.mkdir("/dataset/")
+    if not os.path.isdir("/dataset/val_img"):
+        os.mkdir("/dataset/val_img")
+    if not os.path.isdir("/dataset/val_inst"):
+        os.mkdir("/dataset/val_inst")
+    if not os.path.isdir("/dataset/val_label"):
+        os.mkdir("/dataset/val_label")
+
 def run_model(filename):
     '''Runs the pretrained COCO model'''
     # TODO check to see if this goes any faster with GPUS enabled...
