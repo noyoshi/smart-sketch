@@ -2,11 +2,7 @@ from PIL import Image
 
 #sub 1 to actual value
 
-
-
-
 def convert_rgb_image_to_greyscale(input_file, output_file):
-    rgb_to_grey_dict = {}
     label_to_grey = {}
     label_to_rgb = {}
     rgb_to_label = {}
@@ -47,9 +43,6 @@ def convert_rgb_image_to_greyscale(input_file, output_file):
                 grey = label_to_grey[label]
             p_o[i,j] = grey
     out_img.save(output_file)
-
-
-
 
 
 def main():
