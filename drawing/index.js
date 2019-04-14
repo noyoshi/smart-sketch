@@ -32,7 +32,7 @@ document.getElementById('controlSize').addEventListener('change', function () {
   currentSize = this.value;
   document.getElementById("showSize").innerHTML = this.value;
 });
-document.getElementById('saveToImage').addEventListener('click', function () {
+document.getElementById('uploadimage').addEventListener('click', function () {
   downloadCanvas(this, 'canvas', 'masterpiece.png');
 }, false);
 document.getElementById('eraser').addEventListener('click', eraser);
@@ -85,6 +85,16 @@ function createCanvas() {
 function downloadCanvas(link, canvas, filename) {
   link.href = document.getElementById(canvas).toDataURL();
   link.download = filename;
+}
+
+function upload(postUrl, fieldName, filePath) {
+  var formData = new FormData();
+  formData.append(fieldName, new File(filePath));
+
+  var req = new XMLHttpRequest();
+  req.open("POST", postUrl);
+  req.onload = function (event) { alert(event.target.responseText); };
+  req.send(formData);
 }
 
 // SAVE FUNCTION
