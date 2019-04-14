@@ -21,16 +21,19 @@ def convert_rgb_image_to_greyscale(input_file, output_file):
     label_to_rgb["hill"] = (119,108,45)
     label_to_rgb["leaves"] = (191,96,44)
     label_to_rgb["river"] = (50,96,77)
+    labels = open("labels.md")
+    for line in labels:
+        columns = line.split("=")
+        num = columns[1].strip().split(",")
+        label = columns[0].strip()
+        label_to_rgb[label] = (num)
     rgb_to_label = {v: k for k, v in label_to_rgb.items()}
     labels = open("labels.md")
-    i = 0
     for line in labels:
-        if(i>12):
-            columns = line.split("|")
-            num = int(columns[0].strip())-1
-            label = columns[1].strip()
-            label_to_grey[label] = (num)
-        i = i + 1
+        columns = line.split("|")
+        num = int(columns[0].strip())-1
+        label = columns[1].strip()
+        label_to_grey[label] = (num)
     in_img = Image.open(input_file)
     out_img = Image.new("L",(in_img.size[0],in_img.size[1]))
     pixels = in_img.load()

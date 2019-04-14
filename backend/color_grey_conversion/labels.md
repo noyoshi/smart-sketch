@@ -1,106 +1,94 @@
-# Labels in COCO-Stuff
-Below we present an overview of the labels in COCO-Stuff, as well as their indices and descriptions.
-We also include a preview image for each class that shows 4 example images with regions (i.e. connected components in the label map - we do not have instance annotations for stuff classes) of the particular class.
-Note that we only provide descriptions for stuff labels (92-182).
-Furthermore, 11 classes have been removed from COCO and therefore lack a preview image.
-
-Note that despite our best efforts to make labels unambiguous, crowd-sourced annotations are never free of errors.
-In particular, the label 'clothes' is often assigned to incompletely annotated persons (which it should not).
-Furthermore, the difference between 'cupboard' and 'cabinet', 'fog' and 'sky-clouds' and 'cage' and 'fence' is not always clear from the annotations.
-
-Id	|	Label name	|	Preview	|	Description
----	|	---	|	---	|	---
 0	|	unlabeled	|		|	Pixels that do not belong to any of the other classes
-1	|	person	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-1-person.png)	|	
-2	|	bicycle	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-2-bicycle.png)	|	
-3	|	car	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-3-car.png)	|	
-4	|	motorcycle	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-4-motorcycle.png)	|	
-5	|	airplane	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-5-airplane.png)	|	
-6	|	bus	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-6-bus.png)	|	
-7	|	train	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-7-train.png)	|	
-8	|	truck	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-8-truck.png)	|	
-9	|	boat	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-9-boat.png)	|	
-10	|	traffic light	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-10-traffic%20light.png)	|	
-11	|	fire hydrant	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-11-fire%20hydrant.png)	|	
+1	|	person	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-1-person.png)	|
+2	|	bicycle	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-2-bicycle.png)	|
+3	|	car	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-3-car.png)	|
+4	|	motorcycle	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-4-motorcycle.png)	|
+5	|	airplane	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-5-airplane.png)	|
+6	|	bus	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-6-bus.png)	|
+7	|	train	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-7-train.png)	|
+8	|	truck	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-8-truck.png)	|
+9	|	boat	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-9-boat.png)	|
+10	|	traffic light	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-10-traffic%20light.png)	|
+11	|	fire hydrant	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-11-fire%20hydrant.png)	|
 12	|	street sign	|		|	Removed from COCO.
-13	|	stop sign	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-13-stop%20sign.png)	|	
-14	|	parking meter	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-14-parking%20meter.png)	|	
-15	|	bench	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-15-bench.png)	|	
-16	|	bird	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-16-bird.png)	|	
-17	|	cat	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-17-cat.png)	|	
-18	|	dog	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-18-dog.png)	|	
-19	|	horse	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-19-horse.png)	|	
-20	|	sheep	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-20-sheep.png)	|	
-21	|	cow	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-21-cow.png)	|	
-22	|	elephant	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-22-elephant.png)	|	
-23	|	bear	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-23-bear.png)	|	
-24	|	zebra	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-24-zebra.png)	|	
-25	|	giraffe	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-25-giraffe.png)	|	
+13	|	stop sign	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-13-stop%20sign.png)	|
+14	|	parking meter	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-14-parking%20meter.png)	|
+15	|	bench	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-15-bench.png)	|
+16	|	bird	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-16-bird.png)	|
+17	|	cat	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-17-cat.png)	|
+18	|	dog	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-18-dog.png)	|
+19	|	horse	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-19-horse.png)	|
+20	|	sheep	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-20-sheep.png)	|
+21	|	cow	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-21-cow.png)	|
+22	|	elephant	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-22-elephant.png)	|
+23	|	bear	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-23-bear.png)	|
+24	|	zebra	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-24-zebra.png)	|
+25	|	giraffe	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-25-giraffe.png)	|
 26	|	hat	|		|	Removed from COCO.
-27	|	backpack	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-27-backpack.png)	|	
-28	|	umbrella	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-28-umbrella.png)	|	
+27	|	backpack	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-27-backpack.png)	|
+28	|	umbrella	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-28-umbrella.png)	|
 29	|	shoe	|		|	Removed from COCO.
 30	|	eye glasses	|		|	Removed from COCO.
-31	|	handbag	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-31-handbag.png)	|	
-32	|	tie	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-32-tie.png)	|	
-33	|	suitcase	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-33-suitcase.png)	|	
-34	|	frisbee	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-34-frisbee.png)	|	
-35	|	skis	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-35-skis.png)	|	
-36	|	snowboard	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-36-snowboard.png)	|	
-37	|	sports ball	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-37-sports%20ball.png)	|	
-38	|	kite	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-38-kite.png)	|	
-39	|	baseball bat	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-39-baseball%20bat.png)	|	
-40	|	baseball glove	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-40-baseball%20glove.png)	|	
-41	|	skateboard	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-41-skateboard.png)	|	
-42	|	surfboard	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-42-surfboard.png)	|	
-43	|	tennis racket	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-43-tennis%20racket.png)	|	
-44	|	bottle	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-44-bottle.png)	|	
+31	|	handbag	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-31-handbag.png)	|
+32	|	tie	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-32-tie.png)	|
+33	|	suitcase	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-33-suitcase.png)	|
+34	|	frisbee	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-34-frisbee.png)	|
+35	|	skis	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-35-skis.png)	|
+36	|	snowboard	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-36-snowboard.png)	|
+37	|	sports ball	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-37-sports%20ball.png)	|
+38	|	kite	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-38-kite.png)	|
+39	|	baseball bat	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-39-baseball%20bat.png)	|
+40	|	baseball glove	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-40-baseball%20glove.png)	|
+41	|	skateboard	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-41-skateboard.png)	|
+42	|	surfboard	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-42-surfboard.png)	|
+43	|	tennis racket	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-43-tennis%20racket.png)	|
+44	|	bottle	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-44-bottle.png)	|
 45	|	plate	|		|	Removed from COCO.
-46	|	wine glass	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-46-wine%20glass.png)	|	
-47	|	cup	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-47-cup.png)	|	
-48	|	fork	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-48-fork.png)	|	
-49	|	knife	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-49-knife.png)	|	
-50	|	spoon	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-50-spoon.png)	|	
-51	|	bowl	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-51-bowl.png)	|	
-52	|	banana	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-52-banana.png)	|	
-53	|	apple	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-53-apple.png)	|	
-54	|	sandwich	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-54-sandwich.png)	|	
-55	|	orange	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-55-orange.png)	|	
-56	|	broccoli	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-56-broccoli.png)	|	
-57	|	carrot	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-57-carrot.png)	|	
-58	|	hot dog	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-58-hot%20dog.png)	|	
-59	|	pizza	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-59-pizza.png)	|	
-60	|	donut	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-60-donut.png)	|	
-61	|	cake	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-61-cake.png)	|	
-62	|	chair	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-62-chair.png)	|	
-63	|	couch	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-63-couch.png)	|	
-64	|	potted plant	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-64-potted%20plant.png)	|	
-65	|	bed	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-65-bed.png)	|	
+46	|	wine glass	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-46-wine%20glass.png)	|
+47	|	cup	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-47-cup.png)	|
+48	|	fork	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-48-fork.png)	|
+49	|	knife	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-49-knife.png)	|
+50	|	spoon	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-50-spoon.png)	|
+51	|	bowl	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-51-bowl.png)	|
+52	|	banana	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-52-banana.png)	|
+53	|	apple	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-53-apple.png)	|
+54	|	sandwich	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-54-sandwich.png)	|
+55	|	orange	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-55-orange.png)	|
+56	|	broccoli	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-56-broccoli.png)	|
+57	|	carrot	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-57-carrot.png)	|
+58	|	hot dog	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-58-hot%20dog.png)	|
+59	|	pizza	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-59-pizza.png)	|
+60	|	donut	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-60-donut.png)	|
+61	|	cake	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-61-cake.png)	|
+62	|	chair	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-62-chair.png)	|
+63	|	couch	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-63-couch.png)	|
+64	|	potted plant	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-64-potted%20plant.png)	|
+65	|	bed	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-65-bed.png)	|
 66	|	mirror	|		|	Removed from COCO.
-67	|	dining table	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-67-dining%20table.png)	|	
+67	|	dining table	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-67-dining%20table.png)	|
 68	|	window	|		|	Removed from COCO.
 69	|	desk	|		|	Removed from COCO.
-70	|	toilet	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-70-toilet.png)	|	
+70	|	toilet	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-70-toilet.png)	|
 71	|	door	|		|	Removed from COCO.
-72	|	tv	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-72-tv.png)	|	
-73	|	laptop	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-73-laptop.png)	|	
-74	|	mouse	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-74-mouse.png)	|	
-75	|	remote	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-75-remote.png)	|	
-76	|	keyboard	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-76-keyboard.png)	|	
-77	|	cell phone	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-77-cell%20phone.png)	|	
-78	|	microwave	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-78-microwave.png)	|	
-79	|	oven	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-79-oven.png)	|	
-80	|	toaster	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-80-toaster.png)	|	
-81	|	sink	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-81-sink.png)	|	
-82	|	refrigerator	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-82-refrigerator.png)	|	
+72	|	tv	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-72-tv.png)	|
+73	|	laptop	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-73-laptop.png)	|
+74	|	mouse	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-74-mouse.png)	|
+75	|	remote	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-75-remote.png)	|
+76	|	keyboard	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-76-keyboard.png)	|
+77	|	cell phone	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-77-cell%20phone.png)	|
+78	|	microwave	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-78-microwave.png)	|
+79	|	oven	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-79-oven.png)	|
+80	|	toaster	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-80-toaster.png)	|
+81	|	sink	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-81-sink.png)	|
+82	|	refrigerator	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-82-refrigerator.png)	|
 83	|	blender	|		|	Removed from COCO.
-84	|	book	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-84-book.png)	|	
-85	|	clock	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-85-clock.png)	|	
-86	|	vase	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-86-vase.png)	|	
-87	|	scissors	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-87-scissors.png)	|	
-88	|	teddy bear	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-88-teddy%20bear.png)	|	
-89	|	hair drier	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-89-hair%20drier.png)	|	
-90	|	toothbrush	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-90-toothbrush.png)	|	
+84	|	book	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-84-book.png)	|
+85	|	clock	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-85-clock.png)	|
+86	|	vase	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-86-vase.png)	|
+87	|	scissors	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-87-scissors.png)	|
+88	|	teddy bear	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-88-teddy%20bear.png)	|
+89	|	hair drier	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-89-hair%20drier.png)	|
+90	|	toothbrush	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-90-toothbrush.png)	|
 91	|	hair brush	|		|	Removed from COCO.
 92	|	banner	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-92-banner.png)	|	Any large sign, especially if constructed of soft material or fabric, often seen in stadiums and advertising.
 93	|	blanket	|	[(view)](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/preview/label-93-blanket.png)	|	A loosely woven fabric, used for warmth while sleeping.
