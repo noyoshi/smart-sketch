@@ -1,1 +1,5 @@
 SPADE/
+dataset/*
+results/
+img/
+checkpoints/

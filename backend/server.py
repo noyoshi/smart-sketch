@@ -20,6 +20,16 @@ LABEL_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_label')
 EXPORT_LOCATION = os.path.join(os.path.dirname(__file__), 'results/coco_pretrained/test_latest/images/synthesized_image')
 STATIC_IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
 
+def check_for_dataset_folder():
+    if not os.path.isdir("dataset/"):
+        os.mkdir("dataset/")
+    if not os.path.isdir("dataset/val_img"):
+        os.mkdir("dataset/val_img")
+    if not os.path.isdir("dataset/val_inst"):
+        os.mkdir("dataset/val_inst")
+    if not os.path.isdir("dataset/val_label"):
+        os.mkdir("dataset/val_label")
+
 def run_model(filename):
     '''Runs the pretrained COCO model'''
     # TODO check to see if this goes any faster with GPUS enabled...
@@ -47,30 +57,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_status(204)
         self.finish()
 
-
-class UploadHandler(BaseHandler):
-    def post(self, name=None):  # I *think* name is the sub endpoint?
-        # NOTE - if you pass self.write a dictionary, it will automatically write out
-        # JSON and set the content type to JSON
-        # TODO Fix this with how we will be getting the file from the front end...
-
-        # TODO change the way that we save the model?
-        print("recieved a file")
-        pic = str(self.request.body)
-        # print(pic.split(','))
-        base64_string = pic.split(',')[1]
-        img_data = base64.b64decode(base64_string)
-        color_fname = "color.png"
-        # TODO determine the mimetype... frick. but its always a png so its ok?
-        # relative_path = 'img/' + color_fname
-        output_color_file = STATIC_IMG_FOLDER + '/' + color_fname
-
-        # Writes the color image
-        with open(output_color_file, 'wb+') as out_f:
-            out_f.write(img_data)
-
-        greyscale_fname = "greyscale.png"
-
+def make_processable(greyscale_fname,output_color_file):
         # Inst folder
         ouptut_greyscale_file = INST_FOLDER + '/' + greyscale_fname
 
@@ -84,15 +71,43 @@ class UploadHandler(BaseHandler):
         ouptut_greyscale_file_img = IMG_FOLDER + '/' + greyscale_fname
         copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
 
+def export_image(greyscale_fname):
+        current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
+        export_image_location = STATIC_IMG_FOLDER + "/" + greyscale_fname
+        copy_file(current_image_location, export_image_location)
+
+class UploadHandler(BaseHandler):
+    def post(self, name=None):
+        # TODO Fix this with how we will be getting the file from the front end...
+
+        # TODO change the way that we save the model?
+        self.application.logger.info("Recieved a file")
+        pic = str(self.request.body)
+        # print(pic.split(','))
+        base64_string = pic.split(',')[1]
+        img_data = base64.b64decode(base64_string)
+        color_fname = "color.png"
+        # relative_path = 'img/' + color_fname
+        output_color_file = STATIC_IMG_FOLDER + '/' + color_fname
+
+        # Writes the color image
+        with open(output_color_file, 'wb+') as out_f:
+            out_f.write(img_data)
+
+        greyscale_fname = "greyscale.png"
+
+        make_processable(greyscale_fname,output_color_file)
+
         # We shouldnt need to pass it a string anymore
-        image_location = run_model(greyscale_fname)
-        image_location = "boo"
-        # copy_file()
+        _ = run_model(greyscale_fname)
+        # Where is the final image??
+
+        export_image(greyscale_fname)
 
         # TODO change the relative path here to be the path to the image generated - IE
         # the thingy you generated earlier...
         self.write({"result": "success",
-                    "location": image_location})
+                    "location": export_image_location})
 
 
 class MainHandler(BaseHandler):
@@ -116,6 +131,7 @@ class MainApplication(tornado.web.Application):
         self.ioloop = tornado.ioloop.IOLoop.instance()
         self.logger = logging.getLogger()
 
+
         # Tie the handlers to the routes here
         self.add_handlers('.*', [
             (r'/', MainHandler),
@@ -135,6 +151,7 @@ class MainApplication(tornado.web.Application):
 
 
 if __name__ == "__main__":
+    check_for_dataset_folder()
     tornado.options.define('debug', default=False,
                            help='Enable debugging mode.')
 
