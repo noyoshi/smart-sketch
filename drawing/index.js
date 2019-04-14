@@ -6,7 +6,7 @@ var body = document.getElementsByTagName("body")[0];
 var ctx = canvas.getContext('2d');
 var linesArray = [];
 currentSize = 5;
-var currentColor = "rgb(200,20,100)";
+var currentColor = "#759edf";
 var currentBg = "white";
 
 // INITIAL LAUNCH
