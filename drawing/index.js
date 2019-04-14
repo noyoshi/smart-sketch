@@ -33,7 +33,7 @@ document.getElementById('controlSize').addEventListener('change', function () {
   document.getElementById("showSize").innerHTML = this.value;
 });
 document.getElementById('uploadimage').addEventListener('click', function () {
-  downloadCanvas(this, 'canvas', 'masterpiece.png');
+  upload('canvas');
 }, false);
 document.getElementById('eraser').addEventListener('click', eraser);
 document.getElementById('clear').addEventListener('click', createCanvas);
@@ -87,14 +87,19 @@ function downloadCanvas(link, canvas, filename) {
   link.download = filename;
 }
 
-function upload(postUrl, fieldName, filePath) {
-  var formData = new FormData();
-  formData.append(fieldName, new File(filePath));
+// UPLOAD CANVAS 
 
-  var req = new XMLHttpRequest();
-  req.open("POST", postUrl);
-  req.onload = function (event) { alert(event.target.responseText); };
-  req.send(formData);
+function upload(canvas) {
+  var dataURL = canvas.toDataURL();
+  $.ajax({
+    type: "POST",
+    url: "/upload",
+    data: {
+      imgBase64: dataURL
+    }
+  }).done(function (o) {
+    console.log('upload file');
+  });
 }
 
 // SAVE FUNCTION
