@@ -23,7 +23,7 @@ def convert_rgb_image_to_greyscale(input_file, output_file):
     out_img = Image.new("L",(in_img.size[0],in_img.size[1]))
     pixels = in_img.load()
     p_o = out_img.load()
-    grey = (0)
+    grey = 0
     for i in range(in_img.size[0]):    # for every col:
         for j in range(in_img.size[1]):    # For every row
             if(pixels[i,j][0:3] in rgb_to_label.keys()):
