@@ -6,6 +6,7 @@ import sys
 import os
 import subprocess
 import base64
+import uuid
 
 import tornado.ioloop
 import tornado.web
@@ -17,8 +18,10 @@ INST_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_inst')
 LABEL_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_label')
 
 # This is where the image will go
-EXPORT_LOCATION = os.path.join(os.path.dirname(__file__), 'results/coco_pretrained/test_latest/images/synthesized_image')
+EXPORT_LOCATION = os.path.join(os.path.dirname(
+    __file__), 'results/coco_pretrained/test_latest/images/synthesized_image')
 STATIC_IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
+
 
 def check_for_dataset_folder():
     if not os.path.isdir("dataset/"):
@@ -30,6 +33,7 @@ def check_for_dataset_folder():
     if not os.path.isdir("dataset/val_label"):
         os.mkdir("dataset/val_label")
 
+
 def run_model(filename):
     '''Runs the pretrained COCO model'''
     # TODO check to see if this goes any faster with GPUS enabled...
@@ -40,9 +44,11 @@ def run_model(filename):
     result = subprocess.check_output(command)
     return EXPORT_LOCATION + '/' + filename
 
+
 def copy_file(old="avon.png", new="avon.png"):
     command_string = "cp " + old + " " + new
     subprocess.check_output(command_string.split(' '))
+
 
 class BaseHandler(tornado.web.RequestHandler):
     # This is a handler that will get associated with an endpoint
@@ -57,25 +63,30 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_status(204)
         self.finish()
 
-def make_processable(greyscale_fname,output_color_file):
+
+def make_processable(greyscale_fname, output_color_file):
         # Inst folder
-        ouptut_greyscale_file = INST_FOLDER + '/' + greyscale_fname
+    ouptut_greyscale_file = INST_FOLDER + '/' + greyscale_fname
 
-        # Converts the file to greyscale and saves it to the inst folder?
-        color_to_grey.convert_rgb_image_to_greyscale(output_color_file, ouptut_greyscale_file)
+    # Converts the file to greyscale and saves it to the inst folder?
+    color_to_grey.convert_rgb_image_to_greyscale(
+        output_color_file, ouptut_greyscale_file)
 
-        ouptut_greyscale_file_labels = LABEL_FOLDER + '/' + greyscale_fname
+    ouptut_greyscale_file_labels = LABEL_FOLDER + '/' + greyscale_fname
 
-        copy_file(ouptut_greyscale_file, ouptut_greyscale_file_labels)
+    copy_file(ouptut_greyscale_file, ouptut_greyscale_file_labels)
 
-        ouptut_greyscale_file_img = IMG_FOLDER + '/' + greyscale_fname
-        copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
+    ouptut_greyscale_file_img = IMG_FOLDER + '/' + greyscale_fname
+    copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
+
 
 def export_image(greyscale_fname):
-        current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
-        export_image_location = STATIC_IMG_FOLDER + "/" + greyscale_fname
-        copy_file(current_image_location, export_image_location)
-        return export_image_location
+    current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
+    export_image_location = STATIC_IMG_FOLDER + \
+        "/" + uuid.uuid4().hex + greyscale_fname
+    copy_file(current_image_location, export_image_location)
+    return export_image_location
+
 
 class UploadHandler(BaseHandler):
     def post(self, name=None):
@@ -97,7 +108,7 @@ class UploadHandler(BaseHandler):
 
         greyscale_fname = "greyscale.png"
 
-        make_processable(greyscale_fname,output_color_file)
+        make_processable(greyscale_fname, output_color_file)
 
         # We shouldnt need to pass it a string anymore
         _ = run_model(greyscale_fname)
@@ -132,12 +143,12 @@ class MainApplication(tornado.web.Application):
         self.ioloop = tornado.ioloop.IOLoop.instance()
         self.logger = logging.getLogger()
 
-
         # Tie the handlers to the routes here
         self.add_handlers('.*', [
             (r'/', MainHandler),
             (r'/upload', UploadHandler),
-            (r'/img/(.*)', tornado.web.StaticFileHandler, {'path': STATIC_IMG_FOLDER})
+            (r'/img/(.*)', tornado.web.StaticFileHandler,
+             {'path': STATIC_IMG_FOLDER})
         ])
 
     def run(self):

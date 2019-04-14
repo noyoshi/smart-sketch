@@ -1,45 +1,24 @@
-@font-face {
-  font-family: "Rubik";
-  src: url("https://use.typekit.net/ymw8ood.css");
-}
-
-.rubik {
-  font-family: "Rubik", sans-serif;
-}
-
 .colorButtons {
   display: block;
-  margin: 5px 0px;
+  margin: 15px 0;
 }
 
 canvas {
   cursor: crosshair;
 }
 
-.content {
-  padding-top: 40px;
-}
-
-canvas#canvas {
-  /* height: 100%; */
-  /* width: 403px; */
+div#sidebar {
   position: absolute;
-}
-
-.container {
-  max-width: 1300px;
-}
-
-.image {
-  left: 230px;
-  top: 150px;
+  left: 20px;
+  width: 200px;
+  padding: 20px 20px;
+  top: 0;
 }
 
 .btn {
   margin-bottom: 10px;
   width: 100%;
 }
-
 input {
   width: 100%;
   margin-bottom: 10px;
