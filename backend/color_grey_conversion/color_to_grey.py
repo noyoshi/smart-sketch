@@ -14,7 +14,6 @@ def convert_rgb_image_to_greyscale(input_file, output_file):
         label = columns[0].strip()
         label_to_rgb[label] = (num)
     rgb_to_label = {v: k for k, v in label_to_rgb.items()}
-    labels = open("labels.md")
     for line in labels:
         columns = line.split("|")
         num = int(columns[0].strip())-1
@@ -31,6 +30,8 @@ def convert_rgb_image_to_greyscale(input_file, output_file):
                 label = rgb_to_label[pixels[i,j][0:3]]
                 grey = label_to_grey[label]
             p_o[i,j] = grey
+    labels.close()
+    rgb_mapping.close()
     out_img.save(output_file)
 
 
