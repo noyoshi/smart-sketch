@@ -57,6 +57,24 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_status(204)
         self.finish()
 
+def make_processable(greyscale_fname,output_color_file):
+        # Inst folder
+        ouptut_greyscale_file = INST_FOLDER + '/' + greyscale_fname
+
+        # Converts the file to greyscale and saves it to the inst folder?
+        color_to_grey.convert_rgb_image_to_greyscale(output_color_file, ouptut_greyscale_file)
+
+        ouptut_greyscale_file_labels = LABEL_FOLDER + '/' + greyscale_fname
+
+        copy_file(ouptut_greyscale_file, ouptut_greyscale_file_labels)
+
+        ouptut_greyscale_file_img = IMG_FOLDER + '/' + greyscale_fname
+        copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
+
+def export_image(greyscale_fname):
+        current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
+        export_image_location = STATIC_IMG_FOLDER + "/" + greyscale_fname
+        copy_file(current_image_location, export_image_location)
 
 class UploadHandler(BaseHandler):
     def post(self, name=None):
@@ -78,26 +96,13 @@ class UploadHandler(BaseHandler):
 
         greyscale_fname = "greyscale.png"
 
-        # Inst folder
-        ouptut_greyscale_file = INST_FOLDER + '/' + greyscale_fname
-
-        # Converts the file to greyscale and saves it to the inst folder?
-        color_to_grey.convert_rgb_image_to_greyscale(output_color_file, ouptut_greyscale_file)
-
-        ouptut_greyscale_file_labels = LABEL_FOLDER + '/' + greyscale_fname
-
-        copy_file(ouptut_greyscale_file, ouptut_greyscale_file_labels)
-
-        ouptut_greyscale_file_img = IMG_FOLDER + '/' + greyscale_fname
-        copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
+        make_processable(greyscale_fname,output_color_file)
 
         # We shouldnt need to pass it a string anymore
         _ = run_model(greyscale_fname)
         # Where is the final image??
-        
-        current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
-        export_image_location = STATIC_IMG_FOLDER + "/" + greyscale_fname
-        copy_file(current_image_location, export_image_location)
+
+        export_image(greyscale_fname)
 
         # TODO change the relative path here to be the path to the image generated - IE
         # the thingy you generated earlier...
