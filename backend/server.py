@@ -5,10 +5,12 @@ import socket
 import sys
 import os
 import subprocess
+import base64
 
 import tornado.ioloop
 import tornado.web
 import tornado.options
+from color_grey_conversion import color_to_grey
 
 IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_img')
 INST_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_inst')
@@ -18,7 +20,7 @@ LABEL_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_label')
 EXPORT_LOCATION = os.path.join(os.path.dirname(__file__), 'results/coco_pretrained/test_latest/images/synthesized_image')
 STATIC_IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
 
-def run_model(filepath):
+def run_model(filename):
     '''Runs the pretrained COCO model'''
     # TODO check to see if this goes any faster with GPUS enabled...
     # TODO make is it so that concurrent users won't mess with eachother :P aka have hashed or something dataset routes...
@@ -26,12 +28,11 @@ def run_model(filepath):
     command_string = "python3 test.py --name coco_pretrained --dataset_mode coco --dataroot dataset/ --gpu_ids -1 --no_pairing_check"
     command = command_string.split(' ')
     result = subprocess.check_output(command)
-    return EXPORT_LOCATION + '/' + 'avon.png'
+    return EXPORT_LOCATION + '/' + filename
 
-def move_file(old="avon.png", new="avon.png"):
-    command_string = "cp " + EXPORT_LOCATION + "/" + old
-    command_string += " " + STATIC_IMG_FOLDER + "/" + new
-    result = subprocess.check_output(command_string.split(' '))
+def copy_file(old="avon.png", new="avon.png"):
+    command_string = "cp " + old + " " + new
+    subprocess.check_output(command_string.split(' '))
 
 class BaseHandler(tornado.web.RequestHandler):
     # This is a handler that will get associated with an endpoint
@@ -55,16 +56,38 @@ class UploadHandler(BaseHandler):
 
         # TODO change the way that we save the model?
         print("recieved a file")
-        pic = self.request.files['file'][0]
-        fname = pic['filename']
-        relative_path = 'img/' + fname
-        output_file_path = IMG_FOLDER + '/' + fname
+        pic = str(self.request.body)
+        # print(pic.split(','))
+        base64_string = pic.split(',')[1]
+        img_data = base64.b64decode(base64_string)
+        color_fname = "color.png"
+        # TODO determine the mimetype... frick. but its always a png so its ok?
+        # relative_path = 'img/' + color_fname
+        output_color_file = STATIC_IMG_FOLDER + '/' + color_fname
+        
+        # Writes the color image
+        with open(output_color_file, 'wb') as out_f:
+            out_f.write(img_data)
 
-        with open(output_file_path, 'wb') as out_f:
-            out_f.write(pic['body'])
+        greyscale_fname = "greyscale.png"
 
-        image_location = run_model('')
-        move_file()
+        # Inst folder
+        ouptut_greyscale_file = INST_FOLDER + '/' + greyscale_fname
+
+        # Converts the file to greyscale and saves it to the inst folder?
+        color_to_grey.convert_rgb_image_to_greyscale(output_color_file, ouptut_greyscale_file)
+
+        ouptut_greyscale_file_labels = LABEL_FOLDER + '/' + greyscale_fname
+
+        copy_file(ouptut_greyscale_file, ouptut_greyscale_file_labels)
+        
+        ouptut_greyscale_file_img = IMG_FOLDER + '/' + greyscale_fname
+        copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
+
+        # We shouldnt need to pass it a string anymore
+        image_location = run_model(greyscale_fname)
+        image_location = "boo"
+        # copy_file()
 
         # TODO change the relative path here to be the path to the image generated - IE 
         # the thingy you generated earlier...
