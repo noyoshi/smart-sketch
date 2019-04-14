@@ -7,9 +7,9 @@
   font-family: "Rubik", sans-serif;
 }
 
-.drawingpad .colorButtons {
+.colorButtons {
   display: block;
-  margin: 15px 0;
+  margin: 5px 0px;
 }
 
 canvas {
@@ -21,12 +21,12 @@ div#sidebar {
   left: 25px;
   width: 200px;
   padding: 20px 20px;
-  top: 0;
+  top: 120px;
 }
 
 canvas#canvas {
-  left: 300px;
-  top: 60px;
+  left: 230px;
+  top: 150px;
 }
 
 .btn {

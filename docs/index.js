@@ -15,11 +15,6 @@ createCanvas();
 
 // BUTTON EVENT HANDLERS
 
-document.getElementById('canvasUpdate').addEventListener('click', function () {
-  createCanvas();
-  redraw();
-});
-
 jQuery(document).ready(function ($) {
 
   $color_list = [
@@ -199,13 +194,7 @@ document.getElementById('uploadimage').addEventListener('click', function () {
 }, false);
 document.getElementById('eraser').addEventListener('click', eraser);
 document.getElementById('clear').addEventListener('click', createCanvas);
-// document.getElementById('save').addEventListener('click', save);
-// document.getElementById('load').addEventListener('click', load);
-// document.getElementById('clearCache').addEventListener('click', function () {
-//   localStorage.removeItem("savedCanvas");
-//   linesArray = [];
-//   console.log("Cache cleared!");
-// });
+
 
 // REDRAW 
 
@@ -232,8 +221,8 @@ canvas.addEventListener('mouseup', mouseup);
 function createCanvas() {
   canvas.id = "canvas";
   console.log(document.getElementById("sizeX"));
-  canvas.width = parseInt(document.getElementById("sizeX").value);
-  canvas.height = parseInt(document.getElementById("sizeY").value);
+  canvas.width = 360;
+  canvas.height = 350;
   canvas.style.zIndex = 8;
   canvas.style.position = "absolute";
   canvas.style.border = "1px solid";
