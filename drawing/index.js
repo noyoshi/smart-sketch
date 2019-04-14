@@ -90,15 +90,12 @@ function downloadCanvas(link, canvas, filename) {
 // UPLOAD CANVAS 
 
 function upload(canvas) {
-  var dataURL = canvas.toDataURL();
-  $.ajax({
-    type: "POST",
-    url: "/upload",
-    data: {
-      imgBase64: dataURL
-    }
-  }).done(function (o) {
-    console.log('upload file');
+  var dataURL = document.getElementById(canvas).toDataURL("image/png");
+
+  fetch("http://127.0.0.1:8888/upload", { 
+    method: 'POST', 
+    body: dataURL,
+  }).then(function() {
   });
 }
 
@@ -192,4 +189,14 @@ function store(x, y, s, c) {
 function mouseup() {
   isMouseDown = false
   store()
+}
+
+function sky() {
+  currentColor = "rgba(117,158,223)";
+}
+function sand() {
+  currentColor = "rgba(44,30,22)";
+}
+function sea() {
+  currentColor = "rgba(56,79,131)";
 }
