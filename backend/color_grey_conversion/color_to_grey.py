@@ -1,4 +1,5 @@
 from PIL import Image
+import json
 
 #sub 1 to actual value
 
@@ -21,16 +22,18 @@ def convert_rgb_image_to_greyscale(input_file, output_file):
     label_to_rgb["hill"] = (119,108,45)
     label_to_rgb["leaves"] = (191,96,44)
     label_to_rgb["river"] = (50,96,77)
-    labels = open("labels.md")
+    labels = open("./color_grey_conversion/label_to_rgb")
     for line in labels:
         columns = line.split("=")
         num = columns[1].strip().split(",")
         label = columns[0].strip()
-        label_to_rgb[label] = (num)
+        label_to_rgb[label] = tuple(num)
+
     rgb_to_label = {v: k for k, v in label_to_rgb.items()}
-    labels = open("labels.md")
+    labels = open("./labels.md")
     for line in labels:
         columns = line.split("|")
+        print(columns)
         num = int(columns[0].strip())-1
         label = columns[1].strip()
         label_to_grey[label] = (num)
