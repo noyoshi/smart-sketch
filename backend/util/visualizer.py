@@ -14,6 +14,7 @@ try:
 except ImportError:
     from io import BytesIO         # Python 3.x
 
+
 class Visualizer():
     def __init__(self, opt):
         self.opt = opt
@@ -33,18 +34,20 @@ class Visualizer():
             print('create web directory %s...' % self.web_dir)
             util.mkdirs([self.web_dir, self.img_dir])
         if opt.isTrain:
-            self.log_name = os.path.join(opt.checkpoints_dir, opt.name, 'loss_log.txt')
+            self.log_name = os.path.join(
+                opt.checkpoints_dir, opt.name, 'loss_log.txt')
             with open(self.log_name, "a") as log_file:
                 now = time.strftime("%c")
-                log_file.write('================ Training Loss (%s) ================\n' % now)
+                log_file.write(
+                    '================ Training Loss (%s) ================\n' % now)
 
     # |visuals|: dictionary of images to display or save
     def display_current_results(self, visuals, epoch, step):
 
-        ## convert tensors to numpy arrays
+        # convert tensors to numpy arrays
         visuals = self.convert_visuals_to_numpy(visuals)
-                
-        if self.tf_log: # show images in tensorboard output
+
+        if self.tf_log:  # show images in tensorboard output
             img_summaries = []
             for label, image_numpy in visuals.items():
                 # Write the image to a string
@@ -56,28 +59,33 @@ class Visualizer():
                     image_numpy = image_numpy[0]
                 scipy.misc.toimage(image_numpy).save(s, format="jpeg")
                 # Create an Image object
-                img_sum = self.tf.Summary.Image(encoded_image_string=s.getvalue(), height=image_numpy.shape[0], width=image_numpy.shape[1])
+                img_sum = self.tf.Summary.Image(encoded_image_string=s.getvalue(
+                ), height=image_numpy.shape[0], width=image_numpy.shape[1])
                 # Create a Summary value
-                img_summaries.append(self.tf.Summary.Value(tag=label, image=img_sum))
+                img_summaries.append(
+                    self.tf.Summary.Value(tag=label, image=img_sum))
 
             # Create and write Summary
             summary = self.tf.Summary(value=img_summaries)
             self.writer.add_summary(summary, step)
 
-        if self.use_html: # save images to a html file
+        if self.use_html:  # save images to a html file
             for label, image_numpy in visuals.items():
                 if isinstance(image_numpy, list):
                     for i in range(len(image_numpy)):
-                        img_path = os.path.join(self.img_dir, 'epoch%.3d_iter%.3d_%s_%d.png' % (epoch, step, label, i))
+                        img_path = os.path.join(
+                            self.img_dir, 'epoch%.3d_iter%.3d_%s_%d.png' % (epoch, step, label, i))
                         util.save_image(image_numpy[i], img_path)
                 else:
-                    img_path = os.path.join(self.img_dir, 'epoch%.3d_iter%.3d_%s.png' % (epoch, step, label))
+                    img_path = os.path.join(
+                        self.img_dir, 'epoch%.3d_iter%.3d_%s.png' % (epoch, step, label))
                     if len(image_numpy.shape) >= 4:
-                        image_numpy = image_numpy[0]                    
+                        image_numpy = image_numpy[0]
                     util.save_image(image_numpy, img_path)
 
             # update website
-            webpage = html.HTML(self.web_dir, 'Experiment name = %s' % self.name, refresh=5)
+            webpage = html.HTML(
+                self.web_dir, 'Experiment name = %s' % self.name, refresh=5)
             for n in range(epoch, 0, -1):
                 webpage.add_header('epoch [%d]' % n)
                 ims = []
@@ -87,12 +95,14 @@ class Visualizer():
                 for label, image_numpy in visuals.items():
                     if isinstance(image_numpy, list):
                         for i in range(len(image_numpy)):
-                            img_path = 'epoch%.3d_iter%.3d_%s_%d.png' % (n, step, label, i)
+                            img_path = 'epoch%.3d_iter%.3d_%s_%d.png' % (
+                                n, step, label, i)
                             ims.append(img_path)
                             txts.append(label+str(i))
                             links.append(img_path)
                     else:
-                        img_path = 'epoch%.3d_iter%.3d_%s.png' % (n, step, label)
+                        img_path = 'epoch%.3d_iter%.3d_%s.png' % (
+                            n, step, label)
                         ims.append(img_path)
                         txts.append(label)
                         links.append(img_path)
@@ -100,8 +110,10 @@ class Visualizer():
                     webpage.add_images(ims, txts, links, width=self.win_size)
                 else:
                     num = int(round(len(ims)/2.0))
-                    webpage.add_images(ims[:num], txts[:num], links[:num], width=self.win_size)
-                    webpage.add_images(ims[num:], txts[num:], links[num:], width=self.win_size)
+                    webpage.add_images(
+                        ims[:num], txts[:num], links[:num], width=self.win_size)
+                    webpage.add_images(
+                        ims[num:], txts[num:], links[num:], width=self.win_size)
             webpage.save()
 
     # errors: dictionary of error labels and values
@@ -109,15 +121,16 @@ class Visualizer():
         if self.tf_log:
             for tag, value in errors.items():
                 value = value.mean().float()
-                summary = self.tf.Summary(value=[self.tf.Summary.Value(tag=tag, simple_value=value)])
+                summary = self.tf.Summary(
+                    value=[self.tf.Summary.Value(tag=tag, simple_value=value)])
                 self.writer.add_summary(summary, step)
 
     # errors: same format as |errors| of plotCurrentErrors
     def print_current_errors(self, epoch, i, errors, t):
         message = '(epoch: %d, iters: %d, time: %.3f) ' % (epoch, i, t)
         for k, v in errors.items():
-            #print(v)
-            #if v != 0:
+            # print(v)
+            # if v != 0:
             v = v.mean().float()
             message += '%s: %.3f ' % (k, v)
 
@@ -135,11 +148,11 @@ class Visualizer():
             visuals[key] = t
         return visuals
 
-    def save_images(self, image_path, image_numpy):  
-        tile = self.opt.batchSize > 8 
+    def save_images(self, image_path, image_numpy):
+        tile = self.opt.batchSize > 8
         print(tile)
 
-        # Converts the tensor to an image 
+        # Converts the tensor to an image
         image_numpy = util.tensor2im(image_numpy, tile=tile)
         image_dir = "/tmp"
 
@@ -150,4 +163,3 @@ class Visualizer():
         save_path = os.path.join(image_dir, image_name)
         util.save_image(image_numpy, save_path, create_dir=True)
         print("saved image to", save_path)
-

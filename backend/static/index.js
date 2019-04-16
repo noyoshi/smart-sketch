@@ -8,10 +8,20 @@ var linesArray = [];
 currentSize = 5;
 var currentColor = "#759edf";
 var currentBg = "white";
+var myBoard = new DrawingBoard.Board("zbeubeu", {
+  controls: [
+    { Size: { type: "dropdown" } },
+    { DrawingMode: { filler: false } },
+    "Navigation",
+    "Download"
+  ]
+});
+
+myBoard.clearWebStorage();
 
 // INITIAL LAUNCH
 
-createCanvas();
+// createCanvas();
 
 // BUTTON EVENT HANDLERS
 
@@ -122,10 +132,13 @@ jQuery(document).ready(function($) {
     if (!self.hasClass("active")) {
       self.siblings().removeClass("active");
 
-      var color = rgb2hex(self.css("backgroundColor"));
+      // var color = rgb2hex(self.css("backgroundColor"));
+      var color = self.css("backgroundColor");
+
       console.log(color);
 
       currentColor = color;
+      myBoard.ctx.strokeStyle = color; // Sets he board color
 
       self
         .parents(".color-picker-wrap")
@@ -227,10 +240,10 @@ jQuery(document).ready(function($) {
 //   redraw();
 //   currentBg = ctx.fillStyle;
 // });
-document.getElementById("controlSize").addEventListener("change", function() {
-  currentSize = this.value;
-  document.getElementById("showSize").innerHTML = this.value;
-});
+// document.getElementById("controlSize").addEventListener("change", function() {
+//   currentSize = this.value;
+//   document.getElementById("showSize").innerHTML = this.value;
+// });
 document.getElementById("uploadimage").addEventListener(
   "click",
   function() {
@@ -238,8 +251,8 @@ document.getElementById("uploadimage").addEventListener(
   },
   false
 );
-document.getElementById("eraser").addEventListener("click", eraser);
-document.getElementById("clear").addEventListener("click", createCanvas);
+// document.getElementById("eraser").addEventListener("click", eraser);
+// document.getElementById("clear").addEventListener("click", createCanvas);
 
 // REDRAW
 
@@ -257,41 +270,44 @@ function redraw() {
 
 // DRAWING EVENT HANDLERS
 
-canvas.addEventListener("mousedown", function() {
-  mousedown(canvas, event);
-});
-canvas.addEventListener("mousemove", function() {
-  mousemove(canvas, event);
-});
-canvas.addEventListener("mouseup", mouseup);
+// canvas.addEventListener("mousedown", function() {
+//   mousedown(canvas, event);
+// });
+// canvas.addEventListener("mousemove", function() {
+//   mousemove(canvas, event);
+// });
+// canvas.addEventListener("mouseup", mouseup);
 
 // CREATE CANVAS
 
-function createCanvas() {
-  canvas.id = "canvas";
-  let x = document.getElementById("image").width;
-  // TODO figure out how to get this to be 100% of parent...
-  canvas.width = x;
-  canvas.height = x;
-  // canvas.style.zIndex = 8;
-  canvas.style.position = "absolute";
-  canvas.style.border = "1px solid";
-  ctx.fillStyle = currentBg;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  body.appendChild(canvas);
-}
+// function createCanvas() {
+//   canvas.id = "canvas";
+//   let x = document.getElementById("image").width;
+//   // TODO figure out how to get this to be 100% of parent...
+//   canvas.width = x;
+//   canvas.height = x;
+//   // canvas.style.zIndex = 8;
+//   canvas.style.position = "absolute";
+//   canvas.style.border = "1px solid";
+//   ctx.fillStyle = currentBg;
+//   ctx.fillRect(0, 0, canvas.width, canvas.height);
+//   body.appendChild(canvas);
+// }
 
 // DOWNLOAD CANVAS
 
-function downloadCanvas(link, canvas, filename) {
-  link.href = document.getElementById(canvas).toDataURL();
-  link.download = filename;
-}
+// function downloadCanvas(link, canvas, filename) {
+//   link.href = document.getElementById(canvas).toDataURL();
+//   link.download = filename;
+// }
 
 // UPLOAD CANVAS
 
 function upload(canvas) {
-  var dataURL = document.getElementById(canvas).toDataURL("image/png");
+  // TODO change
+  // var dataURL = document.getElementById(canvas).toDataURL("image/png");
+  var dataURL = myBoard.getImg();
+  console.log(dataURL);
   let img = document.getElementById("image");
   img.src = "/img/loading.gif"; // TODO fix this to use a better gif
 
@@ -309,20 +325,20 @@ function upload(canvas) {
     });
 }
 
-function eraser() {
-  currentSize = 50;
-  currentColor = ctx.fillStyle;
-}
+// function eraser() {
+//   currentSize = 50;
+//   currentColor = ctx.fillStyle;
+// }
 
 // GET MOUSE POSITION
 
-function getMousePos(canvas, evt) {
-  var rect = canvas.getBoundingClientRect();
-  return {
-    x: evt.clientX - rect.left,
-    y: evt.clientY - rect.top
-  };
-}
+// function getMousePos(canvas, evt) {
+//   var rect = canvas.getBoundingClientRect();
+//   return {
+//     x: evt.clientX - rect.left,
+//     y: evt.clientY - rect.top
+//   };
+// }
 
 // ON MOUSE DOWN
 
@@ -381,3 +397,5 @@ function sand() {
 function sea() {
   currentColor = "rgba(56,79,131)";
 }
+
+console.log(myBoard.color);

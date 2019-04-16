@@ -21,11 +21,8 @@ LABEL_FOLDER = os.path.join(os.path.dirname(__file__), "dataset/val_label")
 
 STATIC_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
 
-# This is where the image will go
-EXPORT_LOCATION = os.path.join(
-    os.path.dirname(__file__),
-    "results/coco_pretrained/test_latest/images/synthesized_image"
-)
+# This is where the temp image will go
+EXPORT_LOCATION = "/tmp"
 
 STATIC_IMG_FOLDER = os.path.join(
     os.path.dirname(__file__),
@@ -80,8 +77,9 @@ def make_processable(greyscale_fname, output_color_file):
     ouptut_greyscale_file = INST_FOLDER + "/" + greyscale_fname
 
     # Converts the file to greyscale and saves it to the inst folder?
+    print(output_color_file, ouptut_greyscale_file)
     color_to_grey.convert_rgb_image_to_greyscale(
-        output_color_file, 
+        output_color_file,
         ouptut_greyscale_file
     )
 
@@ -161,8 +159,10 @@ class MainApplication(tornado.web.Application):
         self.add_handlers(".*", [
             (r"/", MainHandler),
             (r"/upload", UploadHandler),
-            (r"/img/(.*)", tornado.web.StaticFileHandler, {"path": STATIC_IMG_FOLDER}), 
-            (r".*/static/(.*)", tornado.web.StaticFileHandler, {"path": STATIC_FOLDER})
+            (r"/img/(.*)", tornado.web.StaticFileHandler,
+             {"path": STATIC_IMG_FOLDER}),
+            (r".*/static/(.*)", tornado.web.StaticFileHandler,
+             {"path": STATIC_FOLDER})
         ])
 
     def run(self):
@@ -179,14 +179,15 @@ class MainApplication(tornado.web.Application):
 if __name__ == "__main__":
     check_for_dataset_folder()
     tornado.options.define(
-        "debug", 
+        "debug",
         default=False,
         help="Enable debugging mode."
     )
     tornado.options.define('port', default=8888, help='Port to listen on.')
     tornado.options.define('address', default="127.0.0.1", help='Url')
 
-    tornado.options.define('template_path', default=os.path.join(os.path.dirname(__file__), "templates"), help='Path to templates')
+    tornado.options.define('template_path', default=os.path.join(
+        os.path.dirname(__file__), "templates"), help='Path to templates')
     tornado.options.parse_command_line()
     options = tornado.options.options.as_dict()
     print(options)
