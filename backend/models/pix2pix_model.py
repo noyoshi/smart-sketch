@@ -124,7 +124,6 @@ class Pix2PixModel(torch.nn.Module):
             else self.opt.label_nc
         input_label = self.FloatTensor(bs, nc, h, w).zero_()
         input_semantics = input_label.scatter_(1, label_map, 1.0)
-        print(input_semantics.shape, "after scattering...")
 
         # concatenate instance map if it exists
         if not self.opt.no_instance:
@@ -196,8 +195,6 @@ class Pix2PixModel(torch.nn.Module):
             z, mu, logvar = self.encode_z(real_image)
             if compute_kld_loss:
                 KLD_loss = self.KLDLoss(mu, logvar) * self.opt.lambda_kld
-        print("=====================")
-        print(input_semantics.shape)
         fake_image = self.netG(input_semantics, z=z)
 
         assert (not compute_kld_loss) or self.opt.use_vae, \

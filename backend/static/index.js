@@ -296,9 +296,9 @@ function downloadCanvas(link, canvas, filename) {
 function upload(canvas) {
   var dataURL = document.getElementById(canvas).toDataURL("image/png");
   let img = document.getElementById("image");
-  img.src = "http://" + baseIP + "/img/loading.gif"; // TODO fix this to use a better gif
+  img.src = "/img/loading.gif"; // TODO fix this to use a better gif
 
-  fetch("http://" + baseIP + "/upload", {
+  fetch("/upload", {
     method: "POST",
     body: dataURL
   })
@@ -307,7 +307,7 @@ function upload(canvas) {
       let x = r.location;
       let img = document.getElementById("image");
       console.log("img", img.src);
-      img.src = "http://" + baseIP + "/" + x;
+      img.src = "/" + x;
       console.log(img.src);
     });
 }

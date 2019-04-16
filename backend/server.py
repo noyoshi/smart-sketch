@@ -1,26 +1,36 @@
 # Tornado is more robust - consider using over Flask if do not need to worry about templates?
 
-import logging
-import socket
-import sys
-import os
-import subprocess
 import base64
+import logging
+import os
+import socket
+import subprocess
+import sys
 import uuid
+from test import run
 
 import tornado.ioloop
-import tornado.web
 import tornado.options
+import tornado.web
+
 from color_grey_conversion import color_to_grey
 
-IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_img')
-INST_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_inst')
-LABEL_FOLDER = os.path.join(os.path.dirname(__file__), 'dataset/val_label')
+IMG_FOLDER = os.path.join(os.path.dirname(__file__), "dataset/val_img")
+INST_FOLDER = os.path.join(os.path.dirname(__file__), "dataset/val_inst")
+LABEL_FOLDER = os.path.join(os.path.dirname(__file__), "dataset/val_label")
+
+STATIC_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
 
 # This is where the image will go
-EXPORT_LOCATION = os.path.join(os.path.dirname(
-    __file__), 'results/coco_pretrained/test_latest/images/synthesized_image')
-STATIC_IMG_FOLDER = os.path.join(os.path.dirname(__file__), 'img')
+EXPORT_LOCATION = os.path.join(
+    os.path.dirname(__file__),
+    "results/coco_pretrained/test_latest/images/synthesized_image"
+)
+
+STATIC_IMG_FOLDER = os.path.join(
+    os.path.dirname(__file__),
+    "img"
+)
 
 
 def check_for_dataset_folder():
@@ -35,48 +45,51 @@ def check_for_dataset_folder():
 
 
 def run_model(filename):
-    '''Runs the pretrained COCO model'''
+    """Runs the pretrained COCO model"""
     # TODO check to see if this goes any faster with GPUS enabled...
     # TODO make is it so that concurrent users won't mess with eachother :P aka have hashed or something dataset routes...
     # that will also take a lot of cleaning up...
-    command_string = "python3 test.py --name coco_pretrained --dataset_mode coco --dataroot dataset/ --gpu_ids -1 --no_pairing_check"
-    command = command_string.split(' ')
-    result = subprocess.check_output(command)
-    return EXPORT_LOCATION + '/' + filename
+    # TODO figure out how to not do this from the command line...
+    # command_string = "python3 test.py --name coco_pretrained --dataset_mode coco --dataroot dataset/ --gpu_ids -1 --no_pairing_check"
+    run()
+    # command = command_string.split(" ")
+    # _ = subprocess.check_output(command)
+    return EXPORT_LOCATION + "/" + filename
 
 
 def copy_file(old="avon.png", new="avon.png"):
     command_string = "cp " + old + " " + new
-    subprocess.check_output(command_string.split(' '))
+    subprocess.check_output(command_string.split(" "))
 
 
-class BaseHandler(tornado.web.RequestHandler):
-    # This is a handler that will get associated with an endpoint
+# class BaseHandler(tornado.web.RequestHandler):
+#     # This is a handler that will get associated with an endpoint
+#     def set_default_headers(self):
+#         self.set_header("Access-Control-Allow-Origin", "*")
+#         self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+#         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
 
-    def set_default_headers(self):
-        self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
-        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-
-    def options(self):
-        # no body
-        self.set_status(204)
-        self.finish()
+#     def options(self):
+#         # no body
+#         self.set_status(204)
+#         self.finish()
 
 
 def make_processable(greyscale_fname, output_color_file):
-        # Inst folder
-    ouptut_greyscale_file = INST_FOLDER + '/' + greyscale_fname
+    # Inst folder
+    ouptut_greyscale_file = INST_FOLDER + "/" + greyscale_fname
 
     # Converts the file to greyscale and saves it to the inst folder?
     color_to_grey.convert_rgb_image_to_greyscale(
-        output_color_file, ouptut_greyscale_file)
+        output_color_file, 
+        ouptut_greyscale_file
+    )
 
-    ouptut_greyscale_file_labels = LABEL_FOLDER + '/' + greyscale_fname
+    ouptut_greyscale_file_labels = LABEL_FOLDER + "/" + greyscale_fname
 
     copy_file(ouptut_greyscale_file, ouptut_greyscale_file_labels)
 
-    ouptut_greyscale_file_img = IMG_FOLDER + '/' + greyscale_fname
+    ouptut_greyscale_file_img = IMG_FOLDER + "/" + greyscale_fname
     copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
 
 
@@ -88,22 +101,21 @@ def export_image(greyscale_fname):
     return export_image_location
 
 
-class UploadHandler(BaseHandler):
+class UploadHandler(tornado.web.RequestHandler):
     def post(self, name=None):
         # TODO Fix this with how we will be getting the file from the front end...
-
         # TODO change the way that we save the model?
         self.application.logger.info("Recieved a file")
         pic = str(self.request.body)
         # print(pic.split(','))
-        base64_string = pic.split(',')[1]
+        base64_string = pic.split(",")[1]
         img_data = base64.b64decode(base64_string)
         color_fname = "color.png"
-        # relative_path = 'img/' + color_fname
-        output_color_file = STATIC_IMG_FOLDER + '/' + color_fname
+        # relative_path = "img/" + color_fname
+        output_color_file = STATIC_IMG_FOLDER + "/" + color_fname
 
         # Writes the color image
-        with open(output_color_file, 'wb+') as out_f:
+        with open(output_color_file, "wb+") as out_f:
             out_f.write(img_data)
 
         greyscale_fname = "greyscale.png"
@@ -118,15 +130,17 @@ class UploadHandler(BaseHandler):
 
         # TODO change the relative path here to be the path to the image generated - IE
         # the thingy you generated earlier...
-        self.write({"result": "success",
-                    "location": export_image_location})
+        self.write({
+            "result": "success",
+            "location": export_image_location
+        })
 
 
-class MainHandler(BaseHandler):
-    def get(self, path, name=None):  # I *think* name is the sub endpoint?
+class MainHandler(tornado.web.RequestHandler):
+    def get(self, name=None):  # I *think* name is the sub endpoint?
         # NOTE - if you pass self.write a dictionary, it will automatically write out
         # JSON and set the content type to JSON
-        self.write({"msg": "Hello, World!"})
+        self.render("index.html")
         # Other methods: self.redirect, self.get_argument, self.request.body,
 
 
@@ -144,18 +158,18 @@ class MainApplication(tornado.web.Application):
         self.logger = logging.getLogger()
 
         # Tie the handlers to the routes here
-        self.add_handlers('.*', [
-            (r'/', MainHandler),
-            (r'/upload', UploadHandler),
-            (r'/img/(.*)', tornado.web.StaticFileHandler,
-             {'path': STATIC_IMG_FOLDER})
+        self.add_handlers(".*", [
+            (r"/", MainHandler),
+            (r"/upload", UploadHandler),
+            (r"/img/(.*)", tornado.web.StaticFileHandler, {"path": STATIC_IMG_FOLDER}), 
+            (r".*/static/(.*)", tornado.web.StaticFileHandler, {"path": STATIC_FOLDER})
         ])
 
     def run(self):
         try:
             self.listen(self.port, self.address)
         except socket.error as e:
-            self.logger.fatal('Unable to listen on {}:{} = {}'.format(
+            self.logger.fatal("Unable to listen on {}:{} = {}".format(
                 self.address, self.port, e))
             sys.exit(1)
 
@@ -164,9 +178,13 @@ class MainApplication(tornado.web.Application):
 
 if __name__ == "__main__":
     check_for_dataset_folder()
-    tornado.options.define('debug', default=False,
-                           help='Enable debugging mode.')
+    tornado.options.define(
+        "debug", 
+        default=False,
+        help="Enable debugging mode."
+    )
 
+    tornado.options.define('template_path', default=os.path.join(os.path.dirname(__file__), "templates"), help='Path to templates')
     tornado.options.parse_command_line()
     options = tornado.options.options.as_dict()
     app = MainApplication(**options)

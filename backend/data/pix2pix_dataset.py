@@ -12,28 +12,29 @@ import os
 class Pix2pixDataset(BaseDataset):
     @staticmethod
     def modify_commandline_options(parser, is_train):
-        parser.add_argument('--no_pairing_check', action='store_true',
-                            help='If specified, skip sanity check of correct label-image file pairing')
+        # parser.add_argument('--no_pairing_check', action='store_true',
+                            # help='If specified, skip sanity check of correct label-image file pairing')
         return parser
 
     def initialize(self, opt):
         self.opt = opt
 
-        label_paths, image_paths, instance_paths = self.get_paths(opt)
+        label_paths, image_paths, instance_paths = self.get_paths(opt) #TODO modify
 
         util.natural_sort(label_paths)
         util.natural_sort(image_paths)
-        if not opt.no_instance:
+        if not opt.no_instance: #TODO modify
             util.natural_sort(instance_paths)
 
-        label_paths = label_paths[:opt.max_dataset_size]
-        image_paths = image_paths[:opt.max_dataset_size]
-        instance_paths = instance_paths[:opt.max_dataset_size]
+        label_paths = label_paths[:opt.max_dataset_size] #TODO modify
+        image_paths = image_paths[:opt.max_dataset_size] #TODO modify
+        instance_paths = instance_paths[:opt.max_dataset_size] #TODO modify
 
-        if not opt.no_pairing_check:
-            for path1, path2 in zip(label_paths, image_paths):
-                assert self.paths_match(path1, path2), \
-                    "The label-image pair (%s, %s) do not look like the right pair because the filenames are quite different. Are you sure about the pairing? Please see data/pix2pix_dataset.py to see what is going on, and use --no_pairing_check to bypass this." % (path1, path2)
+        # NEVER sanity check 
+        # if not opt.no_pairing_check:
+        #     for path1, path2 in zip(label_paths, image_paths):
+        #         assert self.paths_match(path1, path2), \
+        #             "The label-image pair (%s, %s) do not look like the right pair because the filenames are quite different. Are you sure about the pairing? Please see data/pix2pix_dataset.py to see what is going on, and use --no_pairing_check to bypass this." % (path1, path2)
 
         self.label_paths = label_paths
         self.image_paths = image_paths
