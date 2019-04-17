@@ -41,35 +41,26 @@ def check_for_dataset_folder():
         os.mkdir("dataset/val_label")
 
 
+def parse_static_filepath(filepath):
+    split_filepath = filepath.split('/')
+    while len(split_filepath) > 2:
+        split_filepath.pop(0)
+
+    return '/'.join(split_filepath)
+
+
 def run_model(filename):
     """Runs the pretrained COCO model"""
     # TODO check to see if this goes any faster with GPUS enabled...
     # TODO make is it so that concurrent users won't mess with eachother :P aka have hashed or something dataset routes...
     # that will also take a lot of cleaning up...
     # TODO figure out how to not do this from the command line...
-    # command_string = "python3 test.py --name coco_pretrained --dataset_mode coco --dataroot dataset/ --gpu_ids -1 --no_pairing_check"
-    run()
-    # command = command_string.split(" ")
-    # _ = subprocess.check_output(command)
-    return EXPORT_LOCATION + "/" + filename
+    return run()
 
 
 def copy_file(old="avon.png", new="avon.png"):
     command_string = "cp " + old + " " + new
     subprocess.check_output(command_string.split(" "))
-
-
-# class BaseHandler(tornado.web.RequestHandler):
-#     # This is a handler that will get associated with an endpoint
-#     def set_default_headers(self):
-#         self.set_header("Access-Control-Allow-Origin", "*")
-#         self.set_header("Access-Control-Allow-Headers", "x-requested-with")
-#         self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-
-#     def options(self):
-#         # no body
-#         self.set_status(204)
-#         self.finish()
 
 
 def make_processable(greyscale_fname, output_color_file):
@@ -91,12 +82,12 @@ def make_processable(greyscale_fname, output_color_file):
     copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
 
 
-def export_image(greyscale_fname):
-    current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
-    export_image_location = STATIC_IMG_FOLDER + \
-        "/" + uuid.uuid4().hex + greyscale_fname
-    copy_file(current_image_location, export_image_location)
-    return export_image_location
+# def export_image(greyscale_fname):
+#     current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
+#     export_image_location = STATIC_IMG_FOLDER + \
+#         "/" + uuid.uuid4().hex + greyscale_fname
+#     copy_file(current_image_location, export_image_location)
+#     return export_image_location
 
 
 class UploadHandler(tornado.web.RequestHandler):
@@ -121,16 +112,14 @@ class UploadHandler(tornado.web.RequestHandler):
         make_processable(greyscale_fname, output_color_file)
 
         # We shouldnt need to pass it a string anymore
-        _ = run_model(greyscale_fname)
-        # Where is the final image??
+        export_image_location = run_model(greyscale_fname)
+        print(export_image_location)
+        static_image_location = parse_static_filepath(export_image_location)
+        print(static_image_location)
 
-        export_image_location = export_image(greyscale_fname)
-
-        # TODO change the relative path here to be the path to the image generated - IE
-        # the thingy you generated earlier...
         self.write({
             "result": "success",
-            "location": export_image_location
+            "location": static_image_location
         })
 
 

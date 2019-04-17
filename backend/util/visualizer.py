@@ -9,6 +9,7 @@ import time
 from . import util
 from . import html
 import scipy.misc
+import uuid
 try:
     from StringIO import StringIO  # Python 2.7
 except ImportError:
@@ -148,18 +149,19 @@ class Visualizer():
             visuals[key] = t
         return visuals
 
-    def save_images(self, image_path, image_numpy):
+    def save_images(self, image_path, image_numpy, image_dir):
         tile = self.opt.batchSize > 8
         print(tile)
 
         # Converts the tensor to an image
         image_numpy = util.tensor2im(image_numpy, tile=tile)
-        image_dir = "/tmp"
+
+        print(image_dir, "IMAGEDIR")
 
         short_path = ntpath.basename(image_path[0])
-        name = os.path.splitext(short_path)[0]
 
-        image_name = '%s.png' % (name)
+        image_name = '%s.png' % (uuid.uuid4())
         save_path = os.path.join(image_dir, image_name)
         util.save_image(image_numpy, save_path, create_dir=True)
         print("saved image to", save_path)
+        return save_path
