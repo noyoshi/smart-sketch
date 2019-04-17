@@ -7,7 +7,7 @@ import os
 import ntpath
 import time
 from . import util
-from . import html
+# from . import html
 import scipy.misc
 import uuid
 try:
