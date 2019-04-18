@@ -13,6 +13,8 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 
+import signal
+
 from color_grey_conversion import color_to_grey
 
 IMG_FOLDER = os.path.join(os.path.dirname(__file__), "dataset/val_img")
@@ -81,7 +83,6 @@ def make_processable(greyscale_fname, output_color_file):
     ouptut_greyscale_file_img = IMG_FOLDER + "/" + greyscale_fname
     copy_file(ouptut_greyscale_file, ouptut_greyscale_file_img)
 
-
 # def export_image(greyscale_fname):
 #     current_image_location = EXPORT_LOCATION + "/" + greyscale_fname
 #     export_image_location = STATIC_IMG_FOLDER + \
@@ -132,6 +133,17 @@ class MainHandler(tornado.web.RequestHandler):
 
 
 class MainApplication(tornado.web.Application):
+    is_closing = False
+
+    def signal_handler(self, signum, frame):
+        logging.info('exiting...')
+        self.is_closing = True
+
+    def try_exit(self):
+        if self.is_closing:
+            tornado.ioloop.IOLoop.instance().stop()
+            logging.info('exit success')
+
     def __init__(self, **settings):
         tornado.web.Application.__init__(self, **settings)
         # Add in various member variables here that you want the handlers to be aware of
@@ -156,7 +168,10 @@ class MainApplication(tornado.web.Application):
 
     def run(self):
         try:
+            signal.signal(signal.SIGINT, self.signal_handler)
             self.listen(self.port, self.address)
+            tornado.ioloop.PeriodicCallback(self.try_exit, 100).start()
+
         except socket.error as e:
             self.logger.fatal("Unable to listen on {}:{} = {}".format(
                 self.address, self.port, e))
