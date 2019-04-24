@@ -188,7 +188,10 @@ if __name__ == "__main__":
         help="Enable debugging mode."
     )
     tornado.options.define('port', default=80, help='Port to listen on.')
-    tornado.options.define('address', default="127.0.0.1", help='Url')
+    host = "0.0.0.0"
+    if sys.platform == "win32":
+        host = "127.0.0.1"
+    tornado.options.define('address', default=host, help='Url')
 
     tornado.options.define('template_path', default=os.path.join(
         os.path.dirname(__file__), "templates"), help='Path to templates')
