@@ -13,14 +13,10 @@ from util.visualizer import Visualizer
 from util import html
 
 # opt = argparse.Namespace
-<<<<<<< HEAD:backend/hacksc.py
 
-#python test.py --name coco_pretrained --dataset_mode coco --dataroot datasets/coco_stuff/ --gpu_ids -1
+# python test.py --name coco_pretrained --dataset_mode coco --dataroot datasets/coco_stuff/ --gpu_ids -1
 
 # --gpu_ids
-=======
-opt = TestOptions().parse()
->>>>>>> testpy:backend/SPADE/test.py
 
 
 opt = TestOptions().parse()
@@ -29,9 +25,7 @@ model = Pix2PixModel(opt)
 model.eval()
 
 
-
-
-#keep
+# keep
 visualizer = Visualizer(opt)
 # create a webpage that summarizes the all results
 web_dir = os.path.join(opt.results_dir, opt.name,
@@ -47,4 +41,5 @@ for i, data_i in enumerate(dataloader):
     img_path = data_i['path']
     for b in range(generated.shape[0]):
         print('process image... %s' % img_path[b])
-        visualizer.save_images_no_webpage(webpage.get_image_dir(),generated[b], img_path[b:b + 1])
+        visualizer.save_images_no_webpage(
+            webpage.get_image_dir(), generated[b], img_path[b:b + 1])

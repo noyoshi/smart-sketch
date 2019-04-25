@@ -49,7 +49,8 @@ jQuery(document).ready(function($) {
     { color: "#8B0000", title: "roof*" },
     { color: "#DEB887", title: "house*" },
     { color: "#00CED1", title: "window-other*" },
-    { color: "#B22222", title: "wall-brick*" }
+    { color: "#B22222", title: "wall-brick*" },
+    { color: "#8B4513", title: "branch" }
     // { color: "#FF3232", title: "fire" }
   ];
 
