@@ -12,7 +12,6 @@ from test import run
 import tornado.ioloop
 import tornado.options
 import tornado.web
-import sys
 import signal
 
 from color_grey_conversion import color_to_grey
