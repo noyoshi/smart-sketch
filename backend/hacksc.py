@@ -13,10 +13,14 @@ from util.visualizer import Visualizer
 from util import html
 
 # opt = argparse.Namespace
+<<<<<<< HEAD:backend/hacksc.py
 
 #python test.py --name coco_pretrained --dataset_mode coco --dataroot datasets/coco_stuff/ --gpu_ids -1
 
 # --gpu_ids
+=======
+opt = TestOptions().parse()
+>>>>>>> testpy:backend/SPADE/test.py
 
 
 opt = TestOptions().parse()
