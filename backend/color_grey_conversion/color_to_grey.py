@@ -8,41 +8,27 @@ def convert_rgb_image_to_greyscale(input_file, output_file):
     label_to_grey = {}
     label_to_rgb = {}
     rgb_to_label = {}
-    label_to_rgb["sea"] = (56, 79, 131)
-    label_to_rgb["clouds"] = (239, 239, 239)
-    label_to_rgb["dirt"] = (44, 30, 22)
-    label_to_rgb["bush"] = (93, 110, 50)
-    label_to_rgb["grass"] = (183, 210, 78)
-    label_to_rgb["mountain"] = (60, 59, 75)
-    label_to_rgb["road"] = (152, 126, 106)
-    label_to_rgb["sky-other"] = (117, 158, 223)
-    label_to_rgb["tree"] = (53, 38, 19)
-    label_to_rgb["pavement"] = (99, 99, 99)
-    label_to_rgb["flower"] = (230, 112, 182)
-    label_to_rgb["fog"] = (193, 195, 201)
-    label_to_rgb["hill"] = (119, 108, 45)
-    label_to_rgb["leaves"] = (191, 96, 44)
-    label_to_rgb["river"] = (50, 96, 77)
-    # labels = open("./color_grey_conversion/label_to_rgb")
-    # for line in labels:
-    #     columns = line.split("=")
-    #     num = columns[1].strip().split(",")
-    #     label = columns[0].strip()
-    #     label_to_rgb[label] = tuple(num)
 
-    rgb_to_label = {v: k for k, v in label_to_rgb.items()}
-    print(rgb_to_label)
-    labels = open("./labels.md")
-    for line in labels:
-        columns = line.split("|")
-        num = int(columns[0].strip())-1
-        label = columns[1].strip()
-        label_to_grey[label] = (num)
+    with open("labels.txt", "r") as labels:
+        for line in labels.readlines():
+            line = line.strip()
+            split_line = line.split(' ')
+            if len(split_line) < 3:
+                continue
+            grey, label, rgb_list = split_line
+            rgb = tuple(map(int, rgb_list.split(',')))
+
+            label_to_rgb[label] = rgb
+            rgb_to_label[rgb] = label
+            # I forget why we are off by 1
+            label_to_grey[label] = int(grey) - 1
+
     in_img = Image.open(input_file)
     out_img = Image.new("L", (in_img.size[0], in_img.size[1]))
     pixels = in_img.load()
     p_o = out_img.load()
     grey = (0)
+
     for i in range(in_img.size[0]):    # for every col:
         for j in range(in_img.size[1]):    # For every row
             # print(pixels[i, j][0:3])
