@@ -3,13 +3,13 @@
 2 bicycle
 3 car
 4 motorcycle
-5 airplane
+5 airplane 124,252,0
 6 bus
 7 train
 8 truck
-9 boat
+9 boat 210,210,210
 10 traffic
-11 fire
+11 fire 255,50,50
 12 street
 13 stop
 14 parking
@@ -93,7 +93,7 @@
 92 banner
 93 blanket
 94 branch
-95 bridge
+95 bridge 210,105,30
 96 building-other
 97 bush 93,110,50
 98 cabinet
@@ -126,7 +126,7 @@
 125 gravel
 126 ground-other
 127 hill 119,108,45
-128 house
+128 house 222,184,135
 129 leaves 191,96,44
 130 light
 131 mat
@@ -149,7 +149,7 @@
 148 river 50,96,77
 149 road 152,126,106
 150 rock
-151 roof
+151 roof 139,0,0
 152 rug
 153 salad
 154 sand
@@ -157,7 +157,7 @@
 156 shelf 
 157 sky-other 117,158,223
 158 skyscraper
-159 snow
+159 snow 250,250,250
 160 solid-other
 161 stairs
 162 stone
@@ -169,8 +169,8 @@
 168 towel
 169 tree 53,38,19
 170 vegetable
-171 wall-brick
-172 wall-concrete
+171 wall-brick 178,34,34
+172 wall-concrete 
 173 wall-other
 174 wall-panel
 175 wall-stone
@@ -179,5 +179,5 @@
 178 water-other
 179 waterdrops
 180 window-blind
-181 window-other
+181 window-other 0,206,209
 182 wood

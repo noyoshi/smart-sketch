@@ -28,34 +28,29 @@ myBoard.clearWebStorage();
 jQuery(document).ready(function($) {
   $color_list = [
     { color: "#384f83", title: "sea" },
-
     { color: "#efefef", title: "cloud" },
-
     { color: "#2c1e16", title: "dirt" },
-
     { color: "#5d6e32", title: "bush" },
-
     { color: "#b7d24e", title: "grass" },
-
     { color: "#3c3b4b", title: "mountain" },
-
     { color: "#987e6a", title: "road" },
-
     { color: "#759edf", title: "sky-other" },
-
     { color: "#352613", title: "tree" },
-
     { color: "#636363", title: "pavement" },
-
     { color: "#e670b6", title: "flower" },
-
     { color: "#c1c3c9", title: "fog" },
-
     { color: "#776c2d", title: "hill" },
-
     { color: "#bf602c", title: "leaves" },
-
-    { color: "#32604d", title: "river" }
+    { color: "#32604d", title: "river" },
+    { color: "#fafafa", title: "snow" },
+    { color: "#7CFC00", title: "airplane" },
+    { color: "#D2D2D2", title: "boat" },
+    { color: "#D2691E", title: "bridge" },
+    { color: "#8B0000", title: "roof*" },
+    { color: "#DEB887", title: "house*" },
+    { color: "#00CED1", title: "window-other*" },
+    { color: "#B22222", title: "wall-brick*" }
+    // { color: "#FF3232", title: "fire" }
   ];
 
   $(".color-picker").wrap('<div class="color-picker-wrap"></div>');
