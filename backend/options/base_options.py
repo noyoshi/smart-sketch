@@ -178,12 +178,12 @@ class BaseOptions():
         new_opt = pickle.load(open(file_name + '.pkl', 'rb'))
         return new_opt
 
-    def parse(self, save=False):
+    def parse(self, save=False, verbose = True):
 
         opt = self.gather_options()
         opt.isTrain = self.isTrain   # train or test
-
-        self.print_options(opt)
+        if verbose:
+            self.print_options(opt)
         if opt.isTrain:
             self.save_options(opt)
 

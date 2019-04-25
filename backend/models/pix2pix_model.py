@@ -6,6 +6,7 @@ Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses
 import torch
 import models.networks as networks
 import util.util as util
+import warnings
 
 
 class Pix2PixModel(torch.nn.Module):
@@ -14,15 +15,17 @@ class Pix2PixModel(torch.nn.Module):
         networks.modify_commandline_options(parser, is_train)
         return parser
 
-    def __init__(self, opt):
+    def __init__(self, opt,verbose=True):
         super().__init__()
+
         self.opt = opt
         self.FloatTensor = torch.cuda.FloatTensor if self.use_gpu() \
             else torch.FloatTensor
         self.ByteTensor = torch.cuda.ByteTensor if self.use_gpu() \
             else torch.ByteTensor
 
-        self.netG, self.netD, self.netE = self.initialize_networks(opt)
+
+        self.netG, self.netD, self.netE = self.initialize_networks(opt,verbose)
 
         # set loss functions
         if opt.isTrain:
@@ -38,8 +41,8 @@ class Pix2PixModel(torch.nn.Module):
     # of deep networks. We used this approach since DataParallel module
     # can't parallelize custom functions, we branch to different
     # routines based on |mode|.
-    def forward(self, data, mode):
-        input_semantics, real_image = self.preprocess_input(data)
+    def forward(self, data, mode,verbose=True):
+        input_semantics, real_image = self.preprocess_input(data,verbose)
 
         if mode == 'generator':
             g_loss, generated = self.compute_generator_loss(
@@ -58,6 +61,7 @@ class Pix2PixModel(torch.nn.Module):
             return fake_image
         else:
             raise ValueError("|mode| is invalid")
+
 
     def create_optimizers(self, opt):
         G_params = list(self.netG.parameters())
@@ -88,8 +92,10 @@ class Pix2PixModel(torch.nn.Module):
     # Private helper methods
     ############################################################################
 
-    def initialize_networks(self, opt):
-        netG = networks.define_G(opt)
+    def initialize_networks(self, opt,verbose = True):
+
+        netG = networks.define_G(opt,verbose)
+
         netD = networks.define_D(opt) if opt.isTrain else None
         netE = networks.define_E(opt) if opt.use_vae else None
 
@@ -106,7 +112,7 @@ class Pix2PixModel(torch.nn.Module):
     # transforming the label map to one-hot encoding
     # |data|: dictionary of the input data
 
-    def preprocess_input(self, data):
+    def preprocess_input(self, data,verbose=True):
         # move to GPU and change data types
         data['label'] = data['label'].long()
         if self.use_gpu():
@@ -116,7 +122,8 @@ class Pix2PixModel(torch.nn.Module):
 
         # create one-hot label map
         label_map = data['label']
-        print(label_map.shape)
+        if verbose:
+            print(label_map.shape)
         label_map = label_map.clamp(0, self.opt.label_nc)
 
         bs, _, h, w = label_map.size()
@@ -189,14 +196,17 @@ class Pix2PixModel(torch.nn.Module):
         return z, mu, logvar
 
     def generate_fake(self, input_semantics, real_image, compute_kld_loss=False):
+
         z = None
         KLD_loss = None
+
         if self.opt.use_vae:
             z, mu, logvar = self.encode_z(real_image)
             if compute_kld_loss:
                 KLD_loss = self.KLDLoss(mu, logvar) * self.opt.lambda_kld
-        fake_image = self.netG(input_semantics, z=z)
-
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            fake_image = self.netG(input_semantics, z=z)
         assert (not compute_kld_loss) or self.opt.use_vae, \
             "You cannot compute KLD loss if opt.use_vae == False"
 
