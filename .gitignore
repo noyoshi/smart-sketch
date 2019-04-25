@@ -44,4 +44,8 @@ yarn-error.log*
 fonts/
 
 HackSC/
+env/
+*.png
+
+
 
