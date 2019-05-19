@@ -13,12 +13,10 @@ import data
 from data.base_dataset import BaseDataset
 from models.pix2pix_model import Pix2PixModel
 from options.test_options import TestOptions
-# from util import html
 from util.visualizer import Visualizer
 
 
 def run(verbose=False):
-
     opt = TestOptions().parse(verbose = verbose)
 
     dataset_name = "coco"

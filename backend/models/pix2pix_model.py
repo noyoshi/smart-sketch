@@ -53,28 +53,18 @@ class Pix2PixModel(torch.nn.Module):
         data['label'] = data['label'].long()
         if self.use_gpu():
             data['label'] = data['label'].cuda()
-            data['instance'] = data['instance'].cuda()
-            # data['image'] = data['image'].cuda()
 
         # create one-hot label map
         label_map = data['label']
         if verbose:
             print(label_map.shape)
+
         label_map = label_map.clamp(0, self.opt.label_nc)
 
         bs, _, h, w = label_map.size()
-        nc = self.opt.label_nc + 1 if self.opt.contain_dontcare_label \
-            else self.opt.label_nc
-        input_label = self.FloatTensor(bs, nc, h, w).zero_()
+        num_classes = 184
+        input_label = self.FloatTensor(bs, num_classes, h, w).zero_()
         input_semantics = input_label.scatter_(1, label_map, 1.0)
-
-        # concatenate instance map if it exists
-        if not self.opt.no_instance:
-            inst_map = data['instance']
-            instance_edge_map = self.get_edges(inst_map)
-            input_semantics = torch.cat(
-                (input_semantics, instance_edge_map), dim=1)
-
         return input_semantics
 
     def generate_fake(self, input_semantics):

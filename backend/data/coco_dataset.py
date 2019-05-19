@@ -32,28 +32,8 @@ class CocoDataset(Pix2pixDataset):
         # TODO modify this so we can put the images in normal places from the
         # server...
         root = opt.dataroot
-        phase = 'val' if opt.phase == 'test' else opt.phase
-
+        phase = 'val'
         label_dir = os.path.join(root, '%s_label' % phase)
         label_paths = make_dataset(label_dir, recursive=False, read_cache=True)
 
-        if not opt.coco_no_portraits and opt.isTrain:
-            label_portrait_dir = os.path.join(root, '%s_label_portrait' % phase)
-            if os.path.isdir(label_portrait_dir):
-                label_portrait_paths = make_dataset(label_portrait_dir, recursive=False, read_cache=True)
-                label_paths += label_portrait_paths
-
-        if not opt.no_instance:
-            instance_dir = os.path.join(root, '%s_inst' % phase)
-            instance_paths = make_dataset(instance_dir, recursive=False, read_cache=True)
-
-            if not opt.coco_no_portraits and opt.isTrain:
-                instance_portrait_dir = os.path.join(root, '%s_inst_portrait' % phase)
-                if os.path.isdir(instance_portrait_dir):
-                    instance_portrait_paths = make_dataset(instance_portrait_dir, recursive=False, read_cache=True)
-                    instance_paths += instance_portrait_paths
-
-        else:
-            instance_paths = []
-
-        return label_paths, instance_paths
+        return label_paths

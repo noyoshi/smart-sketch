@@ -23,39 +23,6 @@ def load_obj(name ):
     with open(name, 'rb') as f:
         return pickle.load(f)
 
-# returns a configuration for creating a generator
-# |default_opt| should be the opt of the current experiment
-# |**kwargs|: if any configuration should be overriden, it can be specified here
-def copyconf(default_opt, **kwargs):
-    conf = argparse.Namespace(**vars(default_opt))
-    for key in kwargs:
-        print(key, kwargs[key])
-        setattr(conf, key, kwargs[key])
-    return conf
-
-
-def tile_images(imgs, picturesPerRow=4):
-    """ Code borrowed from
-    https://stackoverflow.com/questions/26521365/cleanly-tile-numpy-array-of-images-stored-in-a-flattened-1d-format/26521997
-    """
-
-    # Padding
-    if imgs.shape[0] % picturesPerRow == 0:
-        rowPadding = 0
-    else:
-        rowPadding = picturesPerRow - imgs.shape[0] % picturesPerRow
-    if rowPadding > 0:
-        imgs = np.concatenate([imgs, np.zeros((rowPadding, *imgs.shape[1:]), dtype=imgs.dtype)], axis=0)
-
-    # Tiling Loop (The conditionals are not necessary anymore)
-    tiled = []
-    for i in range(0, imgs.shape[0], picturesPerRow):
-        tiled.append(np.concatenate([imgs[j] for j in range(i, i+picturesPerRow)], axis=1))
-
-    tiled = np.concatenate(tiled, axis=0)
-    return tiled
-
-
 # Converts a Tensor into a Numpy array
 # |imtype|: the desired type of the converted numpy array
 def tensor2im(image_tensor, imtype=np.uint8, normalize=True, tile=False):
@@ -132,17 +99,6 @@ def save_image(image_numpy, image_path, create_dir=False):
     ## save to png
     image_pil.save(image_path.replace('.jpg', '.png'))
 
-def mkdirs(paths):
-    if isinstance(paths, list) and not isinstance(paths, str):
-        for path in paths:
-            mkdir(path)
-    else:
-        mkdir(paths)
-
-def mkdir(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
-
 def atoi(text):
     return int(text) if text.isdigit() else text
 
@@ -178,13 +134,6 @@ def find_class_in_module(target_cls_name, module):
         exit(0)
 
     return cls
-
-def save_network(net, label, epoch, opt):
-    save_filename = '%s_net_%s.pth' % (epoch, label)
-    save_path = os.path.join(opt.checkpoints_dir, opt.name, save_filename)
-    torch.save(net.cpu().state_dict(), save_path)
-    if len(opt.gpu_ids) and torch.cuda.is_available():
-        net.cuda()
 
 def load_network(net, label, epoch, opt):
     save_filename = '%s_net_%s.pth' % (epoch, label)

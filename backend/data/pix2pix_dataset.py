@@ -18,41 +18,15 @@ class Pix2pixDataset(BaseDataset):
 
     def initialize(self, opt):
         self.opt = opt
-
-        label_paths, instance_paths = self.get_paths(opt) #TODO modify
-
+        label_paths = self.get_paths(opt) #TODO modify
         util.natural_sort(label_paths)
-        if not opt.no_instance: #TODO modify
-            util.natural_sort(instance_paths)
-
-        label_paths = label_paths[:opt.max_dataset_size] #TODO modify
-        instance_paths = instance_paths[:opt.max_dataset_size] #TODO modify
-
-        # NEVER sanity check 
-        # if not opt.no_pairing_check:
-        #     for path1, path2 in zip(label_paths, image_paths):
-        #         assert self.paths_match(path1, path2), \
-        #             "The label-image pair (%s, %s) do not look like the right pair because the filenames are quite different. Are you sure about the pairing? Please see data/pix2pix_dataset.py to see what is going on, and use --no_pairing_check to bypass this." % (path1, path2)
-
-        self.label_paths = label_paths
-        self.instance_paths = instance_paths
-
-        size = len(self.label_paths)
-        self.dataset_size = size
-        # if opt.isTrain:
-        #    round_to_ngpus = (size // ngpus) * ngpus
-        #    self.dataset_size = round_to_ngpus
+        self.label_paths = label_paths[:opt.max_dataset_size] #TODO modify
+        self.dataset_size = len(self.label_paths)
 
     def get_paths(self, opt):
         label_paths = []
-        instance_paths = []
         assert False, "A subclass of Pix2pixDataset must override self.get_paths(self, opt)"
-        return label_paths, instance_paths
-
-    def paths_match(self, path1, path2):
-        filename1_without_ext = os.path.splitext(os.path.basename(path1))[0]
-        filename2_without_ext = os.path.splitext(os.path.basename(path2))[0]
-        return filename1_without_ext == filename2_without_ext
+        return label_paths
 
     def __getitem__(self, index):
         # Label Image
@@ -66,20 +40,7 @@ class Pix2pixDataset(BaseDataset):
         # 'unknown' is opt.label_nc
         label_tensor[label_tensor == 255] = self.opt.label_nc
 
-        # if using instance maps
-        if self.opt.no_instance:
-            instance_tensor = 0
-        else:
-            instance_path = self.instance_paths[index]
-            instance = Image.open(instance_path)
-            if instance.mode == 'L':
-                instance_tensor = transform_label(instance) * 255
-                instance_tensor = instance_tensor.long()
-            else:
-                instance_tensor = transform_label(instance)
-
-        input_dict = {'label': label_tensor,
-                      'instance': instance_tensor}
+        input_dict = {'label': label_tensor}
 
         # Give subclasses a chance to modify the final output
         self.postprocess(input_dict)
