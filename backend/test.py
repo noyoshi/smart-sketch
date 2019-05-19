@@ -47,7 +47,7 @@ def run(verbose=False):
         num_workers=int(opt.nThreads),
         drop_last=opt.isTrain
     )
-    model = Pix2PixModel(opt,verbose)
+    model = Pix2PixModel(opt, verbose)
     model.eval()
     visualizer = Visualizer(opt)
     if verbose:
@@ -58,15 +58,14 @@ def run(verbose=False):
             break
 
         # this is just a dictionary that contains tensors and stuff?
-        generated = model(data_i, mode='inference',verbose=verbose)
-        img_path = data_i['path']
+        generated = model(data_i, mode='inference', verbose=verbose)
         for b in range(generated.shape[0]):
             # Should only be one?
             image_dir = os.path.join(
                 os.path.dirname(__file__),
                 "img"
             )
-            return visualizer.save_images(img_path[b:b + 1], generated[b], image_dir,verbose=verbose)
+            return visualizer.save_images(generated[b], image_dir, verbose=verbose)
 
 
 if __name__ == "__main__":

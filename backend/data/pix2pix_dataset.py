@@ -19,15 +19,13 @@ class Pix2pixDataset(BaseDataset):
     def initialize(self, opt):
         self.opt = opt
 
-        label_paths, image_paths, instance_paths = self.get_paths(opt) #TODO modify
+        label_paths, instance_paths = self.get_paths(opt) #TODO modify
 
         util.natural_sort(label_paths)
-        util.natural_sort(image_paths)
         if not opt.no_instance: #TODO modify
             util.natural_sort(instance_paths)
 
         label_paths = label_paths[:opt.max_dataset_size] #TODO modify
-        image_paths = image_paths[:opt.max_dataset_size] #TODO modify
         instance_paths = instance_paths[:opt.max_dataset_size] #TODO modify
 
         # NEVER sanity check 
@@ -37,7 +35,6 @@ class Pix2pixDataset(BaseDataset):
         #             "The label-image pair (%s, %s) do not look like the right pair because the filenames are quite different. Are you sure about the pairing? Please see data/pix2pix_dataset.py to see what is going on, and use --no_pairing_check to bypass this." % (path1, path2)
 
         self.label_paths = label_paths
-        self.image_paths = image_paths
         self.instance_paths = instance_paths
 
         size = len(self.label_paths)
@@ -48,10 +45,9 @@ class Pix2pixDataset(BaseDataset):
 
     def get_paths(self, opt):
         label_paths = []
-        image_paths = []
         instance_paths = []
         assert False, "A subclass of Pix2pixDataset must override self.get_paths(self, opt)"
-        return label_paths, image_paths, instance_paths
+        return label_paths, instance_paths
 
     def paths_match(self, path1, path2):
         filename1_without_ext = os.path.splitext(os.path.basename(path1))[0]
@@ -66,19 +62,9 @@ class Pix2pixDataset(BaseDataset):
         transform_label = get_transform(
             self.opt, params, method=Image.NEAREST, normalize=False)
         label_tensor = transform_label(label) * 255.0
+
         # 'unknown' is opt.label_nc
         label_tensor[label_tensor == 255] = self.opt.label_nc
-
-        # input image (real images)
-        image_path = self.image_paths[index]
-        # assert self.paths_match(label_path, image_path), \
-        #     "The label_path %s and image_path %s don't match." % \
-        #     (label_path, image_path)
-        image = Image.open(image_path)
-        image = image.convert('RGB')
-
-        transform_image = get_transform(self.opt, params)
-        image_tensor = transform_image(image)
 
         # if using instance maps
         if self.opt.no_instance:
@@ -93,10 +79,7 @@ class Pix2pixDataset(BaseDataset):
                 instance_tensor = transform_label(instance)
 
         input_dict = {'label': label_tensor,
-                      'instance': instance_tensor,
-                      'image': image_tensor,
-                      'path': image_path,
-                      }
+                      'instance': instance_tensor}
 
         # Give subclasses a chance to modify the final output
         self.postprocess(input_dict)

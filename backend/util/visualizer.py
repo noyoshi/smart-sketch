@@ -149,7 +149,7 @@ class Visualizer():
             visuals[key] = t
         return visuals
 
-    def save_images(self, image_path, image_numpy, image_dir,verbose=True):
+    def save_images(self, image_numpy, image_dir, verbose=True):
         tile = self.opt.batchSize > 8
         if verbose:
             print(tile)
@@ -159,8 +159,6 @@ class Visualizer():
 
         if verbose:
             print(image_dir, "IMAGEDIR")
-
-        short_path = ntpath.basename(image_path[0])
 
         image_name = '%s.png' % (uuid.uuid4())
         save_path = os.path.join(image_dir, image_name)
