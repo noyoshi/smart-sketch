@@ -4,6 +4,8 @@
 
 ![promo.png](promo.png)
 
+[![](http://img.youtube.com/vi/HfsO59TCnq8/0.jpg)](http://www.youtube.com/watch?v=HfsO59TCnq8 "AI Background Landscape Painting Using SmartSketch XYZ")
+
 ## Credits
 
 - https://nvlabs.github.io/SPADE/
