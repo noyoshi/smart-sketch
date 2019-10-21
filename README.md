@@ -21,3 +21,4 @@
 - [ ] Change how we run the model, make it easier to use (don't use their options object)
 - [ ] Make a seperate frontend server and a backend server (for scaling)
 - [ ] Try to containerize at least the bacckend components
+   
