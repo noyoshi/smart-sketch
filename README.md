@@ -19,9 +19,11 @@
 
 - You'll need to install the pretrained generator model for the COCO dataset into `checkpoints/coco_pretrained/`. Instructions for this can be found on the `nvlabs/spade` repo.
 
-- Make sure you need to install all the Python requirements using `pip3 install -r requirements.txt` (in `/backend` folder).     
+- Make sure you install all the Python requirements using `pip3 install -r requirements.txt` (in `/backend` folder).     
 
-- Once you do so, you should be able to run the server using `python3 server.py`. It will run it on `0.0.0.0` on port 80 (on `127.0.0.1` for Windows users). Unfortunately, these are hardcoded into the server and right now you cannot pass CLI arguments to the server to specify the port and host, as the PyTorch stuff also reads from the command line (will fix this soon).
+- Once you do so, you should be able to run the server using `python3 server.py`. It will run it on `0.0.0.0` on port 80 (on `127.0.0.1` for Windows users). Unfortunately, these are hardcoded into the server and right now you cannot pass CLI arguments to the server to specify the port and host, as the PyTorch stuff also reads from the command line (will fix this soon). If you would like to change this, locate line 195 in `backend/server.py`.
+
+
 
 ### TODOS
 
