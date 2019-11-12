@@ -2,7 +2,7 @@
 
 ## Supercharge your creativity with state of the art image synthesis
 
-![promo.png](docs/promo.png)
+![promo.png](promo.png)
 
 ### Background
 
