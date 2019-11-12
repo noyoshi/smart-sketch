@@ -10,16 +10,18 @@
 
 ## Credits
 
-- https://nvlabs.github.io/SPADE/
-- https://arxiv.org/abs/1903.07291
-- https://github.com/nvlabs/spade/
+- See project page here: https://nvlabs.github.io/SPADE/
+- Read paper here: https://arxiv.org/abs/1903.07291
+- See source code here: https://github.com/nvlabs/spade/
 - Special thanks to @AndroidKitKat for helping us host this!
 
 ## Set Up
 
 - You'll need to install the pretrained generator model for the COCO dataset into `checkpoints/coco_pretrained/`. Instructions for this can be found on the `nvlabs/spade` repo.
 
-- Make sure you need to install all the Python requirements using `pip3 install -r requirements.txt` (in `/backend` folder). Once you do this, you should be able to run the server using `python3 server.py`. It will run it on `0.0.0.0` on port 80 (for Windows users, run on 127.0.0.1). Unfortunately these are hardcoded into the server and right now you cannot pass CLI arguments to the server to specify the port and host, as the PyTorch stuff also reads from the command line (will fix this soon).
+- Make sure you need to install all the Python requirements using `pip3 install -r requirements.txt` (in `/backend` folder).     
+
+- Once you do so, you should be able to run the server using `python3 server.py`. It will run it on `0.0.0.0` on port 80 (on `127.0.0.1` for Windows users). Unfortunately, these are hardcoded into the server and right now you cannot pass CLI arguments to the server to specify the port and host, as the PyTorch stuff also reads from the command line (will fix this soon).
 
 ### TODOS
 
