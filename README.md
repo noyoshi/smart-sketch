@@ -2,9 +2,9 @@
 
 ## Supercharge your creativity with state of the art image synthesis
 
-![promo.png](promo.png)
+![promo.png](docs/promo.png)
 
-Demo below!
+Video Demo below!
 
 [![](http://img.youtube.com/vi/HfsO59TCnq8/0.jpg)](http://www.youtube.com/watch?v=HfsO59TCnq8 "AI Background Landscape Painting Using SmartSketch XYZ")
 
