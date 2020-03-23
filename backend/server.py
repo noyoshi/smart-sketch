@@ -13,6 +13,7 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 import signal
+import os.path as path
 
 from color_grey_conversion import color_to_grey
 
@@ -45,11 +46,8 @@ def check_for_dataset_folder():
 
 
 def parse_static_filepath(filepath):
-    split_filepath = filepath.split('/')
-    while len(split_filepath) > 2:
-        split_filepath.pop(0)
-
-    return '/'.join(split_filepath)
+    split_filepath = filepath.split(path.sep)
+    return path.sep.join(split_filepath[-2:])
 
 
 def run_model(filename):
